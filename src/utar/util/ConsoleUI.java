@@ -96,16 +96,28 @@ public class ConsoleUI {
         }
     }
 
+    // Reads one line of input. If the input stream has ended (the user
+    // pressed Ctrl+D / Ctrl+Z, or piped input ran out) there is nothing
+    // more to read, so we exit cleanly instead of crashing with
+    // NoSuchElementException. All data is already saved after every change.
+    private static String readLine(Scanner sc) {
+        if (!sc.hasNextLine()) {
+            System.out.println(CYAN + "\n\n  Input closed. Goodbye!\n" + RESET);
+            System.exit(0);
+        }
+        return sc.nextLine();
+    }
+
     // Pauses and waits for the user to press ENTER before continuing
     public static void pressEnter(Scanner sc) {
         System.out.print(YELLOW + "\n  Press ENTER to continue..." + RESET);
-        sc.nextLine();
+        readLine(sc);
     }
 
     // Displays a prompt label and returns the user's trimmed input
     public static String prompt(Scanner sc, String label) {
         System.out.print(YELLOW + "  " + label + ": " + RESET);
-        return sc.nextLine().trim();
+        return readLine(sc).trim();
     }
 
     // Prompts for an integer input within the given range, loops until valid
@@ -114,7 +126,7 @@ public class ConsoleUI {
         while (true) {
             System.out.print(YELLOW + "  " + label + " (" + min + "-" + max + "): " + RESET);
             try {
-                int v = Integer.parseInt(sc.nextLine().trim());
+                int v = Integer.parseInt(readLine(sc).trim());
 
                 if (v >= min && v <= max)
                     return v;

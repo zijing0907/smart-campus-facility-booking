@@ -29,7 +29,7 @@ import java.util.ArrayList;
  *   • Singleton design pattern
  *   • File I/O — BufferedReader, PrintWriter, FileWriter
  *   • ArrayList collections
- *   • String operations — splitByPipe uses indexOf/substring only
+ *   • String operations — splitByPipe walks the line with charAt (no regex)
  *   • Exception handling — every read/write block has try/catch
  */
 public class DataStore {
@@ -227,41 +227,68 @@ public class DataStore {
     /**
      * safe — escape a string before writing it to a pipe-delimited file.
      *   • null   becomes the literal text "NULL"
+     *   • '\'    is escaped to "\\" (so a value ending in '\' can't
+     *            swallow the next delimiter)
      *   • '|'    is escaped to "\|" so it doesn't break field boundaries
      */
     private static String safe(String s) {
-        return s == null ? "NULL" : s.replace("|", "\\|");
+        if (s == null) {
+            return "NULL";
+        }
+        return s.replace("\\", "\\\\").replace("|", "\\|");
     }
 
     /**
      * load — reverse of safe(); turns a stored value back into a real String.
      *   • "NULL" becomes a real null
-     *   • "\|"   becomes back to '|'
+     *   • "\x"   becomes back to 'x' (so "\|" → '|' and "\\" → '\')
      */
     private static String load(String s) {
-        return "NULL".equals(s) ? null : s.replace("\\|", "|");
+        if ("NULL".equals(s)) {
+            return null;
+        }
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '\\' && i + 1 < s.length()) {
+                i++;                      // drop the escape character
+                out.append(s.charAt(i));  // keep the character it protected
+            } else {
+                out.append(c);
+            }
+        }
+        return out.toString();
     }
 
     /**
      * splitByPipe — split a line on '|' without using regex.
      *
-     * Uses only indexOf() and substring() (ch06 Strings). Empty trailing
+     * Walks the line one character at a time. An escaped pipe ("\|", written
+     * by safe()) is part of the text, not a delimiter, so it stays inside the
+     * current field; load() removes the escape later. Empty trailing
      * fields are preserved on purpose — the field COUNT must stay
      * consistent with the file format so loadXxx() can index reliably.
      */
     private static String[] splitByPipe(String line) {
         ArrayList<String> parts = new ArrayList<>();
-        int start = 0;
-        int pipe;
+        StringBuilder field = new StringBuilder();
 
-        // Walk through the string, finding each '|' and slicing off the
-        // text in between
-        while ((pipe = line.indexOf('|', start)) != -1) {
-            parts.add(line.substring(start, pipe));
-            start = pipe + 1;
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (c == '\\' && i + 1 < line.length()) {
+                // Escaped character — copy the escape and the next char as-is
+                field.append(c).append(line.charAt(i + 1));
+                i++;
+            } else if (c == '|') {
+                // Real delimiter — close off the current field
+                parts.add(field.toString());
+                field.setLength(0);
+            } else {
+                field.append(c);
+            }
         }
         // Whatever is left after the last '|' is the final field
-        parts.add(line.substring(start));
+        parts.add(field.toString());
 
         return parts.toArray(new String[0]);
     }
