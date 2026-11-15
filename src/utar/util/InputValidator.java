@@ -1,5 +1,8 @@
 package utar.util;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 /**
  * InputValidator.java — Static utility class for checking user input.
  *
@@ -118,11 +121,21 @@ public class InputValidator {
     }
 
     /**
-     * BOOKING_YEAR — the only year accepted by isValidDate().
-     * For this assignment we only allow bookings inside the current
-     * booking year (2026).
+     * How many years after the current one isValidDate() still accepts.
+     * 1 means "this year or next year", so bookings near the end of
+     * December can be made for January.
      */
-    public static final int BOOKING_YEAR = 2026;
+    public static final int MAX_YEARS_AHEAD = 1;
+
+    /** currentYear — today's year, read from the system clock. */
+    public static int currentYear() {
+        return LocalDate.now().getYear();
+    }
+
+    /** maxBookingYear — the latest year isValidDate() accepts. */
+    public static int maxBookingYear() {
+        return currentYear() + MAX_YEARS_AHEAD;
+    }
 
     /**
      * isValidDate — accepts strings shaped like "dd/MM/yyyy".
@@ -130,7 +143,9 @@ public class InputValidator {
      *   • length must be exactly 10
      *   • positions 2 and 5 must be '/'
      *   • all other positions must be digits
-     *   • day 1..31, month 1..12, year == BOOKING_YEAR
+     *   • must be a real calendar date (31/02 and 29/02 in a
+     *     non-leap year are rejected)
+     *   • year between currentYear() and maxBookingYear()
      */
     public static boolean isValidDate(String date) {
         if (date == null || date.length() != 10)
@@ -153,13 +168,17 @@ public class InputValidator {
         int month = Integer.parseInt(date.substring(3, 5));
         int year  = Integer.parseInt(date.substring(6, 10));
 
-        if (day   < 1 || day   > 31)
+        if (year < currentYear() || year > maxBookingYear())
             return false;
 
-        if (month < 1 || month > 12)
+        // LocalDate.of() throws if the day doesn't exist in that month,
+        // e.g. 31/04 or 29/02/2027 (Exception Handling — ch09)
+        try {
+            LocalDate.of(year, month, day);
+            return true;
+        } catch (DateTimeException e) {
             return false;
-
-        return year == BOOKING_YEAR;
+        }
     }
 
     /**

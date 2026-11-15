@@ -145,7 +145,8 @@ public class UserMenu {
             date = ConsoleUI.prompt(sc, "Date (dd/MM/yyyy) — 0 to cancel");
             if (date.equals("0")) return;
             if (InputValidator.isValidDate(date)) break;
-            ConsoleUI.printError("Invalid date. Use dd/MM/yyyy (year 2026), e.g. 20/04/2026.");
+            ConsoleUI.printError("Invalid date. Use a real dd/MM/yyyy date in "
+                    + InputValidator.currentYear() + " or " + InputValidator.maxBookingYear() + ".");
         }
 
         // Start time prompt with retry loop
@@ -222,7 +223,8 @@ public class UserMenu {
             date = ConsoleUI.prompt(sc, "Date (dd/MM/yyyy) — 0 to cancel");
             if (date.equals("0")) return;
             if (InputValidator.isValidDate(date)) break;
-            ConsoleUI.printError("Invalid date. Use dd/MM/yyyy (year 2026), e.g. 20/04/2026.");
+            ConsoleUI.printError("Invalid date. Use a real dd/MM/yyyy date in "
+                    + InputValidator.currentYear() + " or " + InputValidator.maxBookingYear() + ".");
         }
 
         ConsoleUI.printInfo("Use 24-hour time, e.g. 14:00 for 2pm.");

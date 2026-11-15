@@ -435,7 +435,7 @@ public class AdminMenu {
 
                 if (isValidMonthYear(value))
                     break;
-                ConsoleUI.printError("Invalid month/year. Format MM/yyyy, month 01-12, year " + MIN_YEAR + "-" + InputValidator.BOOKING_YEAR + ".");
+                ConsoleUI.printError("Invalid month/year. Format MM/yyyy, month 01-12, year " + MIN_YEAR + "-" + InputValidator.maxBookingYear() + ".");
             }
             period = "MONTHLY";
         } else if (p == 3) {
@@ -447,7 +447,7 @@ public class AdminMenu {
 
                 if (isValidSemesterYear(value))
                     break;
-                ConsoleUI.printError("Invalid semester/year. Must be SEM1/SEM2/SEM3 + /yyyy (" + MIN_YEAR + "-" + InputValidator.BOOKING_YEAR + ").");
+                ConsoleUI.printError("Invalid semester/year. Must be SEM1/SEM2/SEM3 + /yyyy (" + MIN_YEAR + "-" + InputValidator.maxBookingYear() + ").");
             }
             period = "SEMESTER";
         } else if (p == 4) {
@@ -459,7 +459,7 @@ public class AdminMenu {
 
                 if (isValidYear(value))
                     break;
-                ConsoleUI.printError("Invalid year. Must be between " + MIN_YEAR + " and " + InputValidator.BOOKING_YEAR + ".");
+                ConsoleUI.printError("Invalid year. Must be between " + MIN_YEAR + " and " + InputValidator.maxBookingYear() + ".");
             }
             period = "YEARLY";
         }
@@ -472,7 +472,7 @@ public class AdminMenu {
     //  Input helpers — small private methods that ask for the "value"
     //  parameter of the utilization report (e.g. month, year, semester).
     // ─────────────────────────────────────────────────────────────────────────
-    // Accepted year range: bookings only exist from MIN_YEAR up to the booking year
+    // Accepted year range: bookings only exist from MIN_YEAR up to the latest booking year
     // defined in InputValidator. Future years make no sense (no data) and are rejected.
     private static final int MIN_YEAR = 2020;
 
@@ -485,7 +485,7 @@ public class AdminMenu {
             if (s.charAt(i) < '0' || s.charAt(i) > '9')
                 return false;
         int year = Integer.parseInt(s);
-        return year >= MIN_YEAR && year <= InputValidator.BOOKING_YEAR;
+        return year >= MIN_YEAR && year <= InputValidator.maxBookingYear();
     }
 
     // Valid month/year: "MM/yyyy" — 7 chars, '/' at position 2, month 01-12, year in range.
