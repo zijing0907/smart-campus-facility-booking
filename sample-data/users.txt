@@ -1,0 +1,27 @@
+# userId|name|email|password|contact|faculty|role|extra
+ADMIN01|Admin Office|admin@utar.edu.my|admin123|03-90860288|Facility Management Office|ADMIN|
+STAFF01|Demo Staff|staff@utar.edu.my|pass123|010-0000001|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STAFF|Engineering
+STAFF02|Dr. Wong Chee Seng|wong.cs@utar.edu.my|pass123|019-1122334|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STAFF|Engineering
+STAFF03|Dr. Suraya binti Miskon|suraya.m@utar.edu.my|pass123|013-2233445|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STAFF|Computing
+STAFF04|Mr. Rajendran Pillai|raj.p@utar.edu.my|pass123|016-3344556|Faculty of Accountancy and Management (FAM)|STAFF|Accounting
+STAFF05|Ms. Chua Siew Fong|chua.sf@utar.edu.my|pass123|012-4455667|Faculty of Creative Industries (FCI)|STAFF|Design
+STAFF06|Assoc. Prof. Dr. Lau Kok Lim|lau.kl@utar.edu.my|pass123|011-5566778|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STAFF|Electronics
+STU001|Demo Student|student@utar.edu.my|pass123|010-0000002|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STUDENT|Software Engineering
+STU002|Lee Xiao Ming|lee.xm@utar.edu.my|pass123|011-2233445|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STUDENT|Computer Science
+STU003|Priya a/p Nair|priya.n@utar.edu.my|pass123|017-8877665|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STUDENT|Software Engineering
+STU004|Muhammad Hafiz bin Aziz|hafiz.a@utar.edu.my|pass123|013-5544332|Faculty of Accountancy and Management (FAM)|STUDENT|Accounting
+STU005|Nur Aisyah binti Rosli|aisyah.r@utar.edu.my|pass123|014-6677889|Faculty of Creative Industries (FCI)|STUDENT|Graphic Design
+STU006|Chen Wei Jie|chen.wj@utar.edu.my|pass123|016-1122334|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STUDENT|Electrical Engineering
+STU007|Kavitha a/p Subramaniam|kavitha.s@utar.edu.my|pass123|012-9988776|Faculty of Medicine and Health Sciences (FMHS)|STUDENT|Biomedical Science
+STU008|Lim Jun Kai|lim.jk@utar.edu.my|pass123|019-3344556|Faculty of Accountancy and Management (FAM)|STUDENT|Finance
+STU009|Siti Nabilah binti Hamdan|nabilah.h@utar.edu.my|pass123|011-5566778|Faculty of Creative Industries (FCI)|STUDENT|Mass Communication
+STU010|Yew Kian Hong|yew.kh@utar.edu.my|pass123|017-2233445|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STUDENT|Civil Engineering
+STU011|Amirul Hakim bin Saad|amirul.s@utar.edu.my|pass123|013-7788990|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STUDENT|Mechatronics
+STU012|Tan Mei Ling|tan.ml@utar.edu.my|pass123|016-4455667|Faculty of Accountancy and Management (FAM)|STUDENT|Business Administration
+STU013|Harpreet Singh|harpreet.s@utar.edu.my|pass123|012-6677889|Institute of Chinese Studies (ICS)|STUDENT|Chinese Studies
+STU014|Noor Hazwani binti Kamal|hazwani.k@utar.edu.my|pass123|019-1122334|Centre for Foundation Studies (CFS)|STUDENT|Foundation in Science
+STU015|Ong Shi Hao|ong.sh@utar.edu.my|pass123|011-8899001|Lee Kong Chian Faculty of Engineering and Science (LKC FES)|STUDENT|Information Systems
+STU016|Farah Hani binti Zainal|farah.z@utar.edu.my|pass123|017-5544332|Faculty of Accountancy and Management (FAM)|STUDENT|Marketing
+MAINT01|Demo Maintenance|maintenance@utar.edu.my|pass123|010-0000003|Facility Management Office|MAINTENANCE|General
+MAINT02|Ali bin Hassan|ali.h@utar.edu.my|pass123|011-1234567|Facility Management Office|MAINTENANCE|Electrical
+MAINT03|Kumar Selvam|kumar.s@utar.edu.my|pass123|016-9876543|Facility Management Office|MAINTENANCE|HVAC

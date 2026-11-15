@@ -1,0 +1,12 @@
+# Compiled classes
+out/
+*.class
+
+# Runtime data (the app creates data/ on first run and seeds it with sample records)
+data/
+
+# IDE and OS files
+.idea/
+*.iml
+.vscode/
+.DS_Store
