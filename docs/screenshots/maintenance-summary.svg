@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="325" viewBox="0 0 560 325" role="img" aria-label="Maintenance summary">
+<title>Maintenance summary</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="560" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="559" height="324" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="280.0" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Maintenance summary</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- MAINTENANCE SUMMARY REPORT ------------------------</tspan></text>
+<text x="22" y="89"></text>
+<text x="22" y="108">  Total Reports  : 3</text>
+<text x="22" y="127">  Open           : 2</text>
+<text x="22" y="146">  Resolved       : 1</text>
+<text x="22" y="165">  Avg Repair Time: 2.0 day(s)</text>
+<text x="22" y="184"></text>
+<text x="22" y="203">  Maintenance cases per facility:</text>
+<text x="22" y="222">  Computer and Internet Lab K403     : 1 case(s)</text>
+<text x="22" y="241">  Gymnasium                          : 1 case(s)</text>
+<text x="22" y="260">  Tutorial Room KB303                : 1 case(s)</text>
+<text x="22" y="279"></text>
+<text x="22" y="298"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

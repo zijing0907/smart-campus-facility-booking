@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="583" height="439" viewBox="0 0 583 439" role="img" aria-label="Login">
+<title>Login</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="583" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="582" height="438" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="291.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Login</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">+============================================================+</tspan></text>
+<text x="22" y="89"><tspan fill="#39c5cf" font-weight="bold">|             UTAR SMART CAMPUS FACILITY SYSTEM              |</tspan></text>
+<text x="22" y="108"><tspan fill="#39c5cf" font-weight="bold">+============================================================+</tspan></text>
+<text x="22" y="127"></text>
+<text x="22" y="146"><tspan fill="#39c5cf">  [i]   Universiti Tunku Abdul Rahman — Sungai Long Campus</tspan></text>
+<text x="22" y="165"></text>
+<text x="22" y="184">  <tspan fill="#e3b341">[1]</tspan> Login</text>
+<text x="22" y="203">  <tspan fill="#e3b341">[2]</tspan> Register as New User</text>
+<text x="22" y="222">  <tspan fill="#e3b341">[0]</tspan> Exit</text>
+<text x="22" y="241"></text>
+<text x="22" y="260"><tspan fill="#e3b341">  Select option (0-2): </tspan>1</text>
+<text x="22" y="279"></text>
+<text x="22" y="298"><tspan fill="#39c5cf" font-weight="bold">--- LOGIN ---------------------------------------------</tspan></text>
+<text x="22" y="317"></text>
+<text x="22" y="336"><tspan fill="#e3b341">  Email (0 to cancel): </tspan>student@utar.edu.my</text>
+<text x="22" y="355"><tspan fill="#e3b341">  Password: </tspan>pass123</text>
+<text x="22" y="374"><tspan fill="#3fb950">  [OK]  Welcome, Demo Student! [Student]</tspan></text>
+<text x="22" y="393"></text>
+<text x="22" y="412"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

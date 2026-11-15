@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="914" height="629" viewBox="0 0 914 629" role="img" aria-label="Search available facilities">
+<title>Search available facilities</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="914" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="913" height="628" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="457.0" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Search available facilities</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- SEARCH AVAILABLE FACILITIES -----------------------</tspan></text>
+<text x="22" y="89"></text>
+<text x="22" y="108"><tspan fill="#e3b341">  Date (dd/MM/yyyy) — 0 to cancel: </tspan>24/11/2026</text>
+<text x="22" y="127"><tspan fill="#39c5cf">  [i]   Use 24-hour time, e.g. 14:00 for 2pm.</tspan></text>
+<text x="22" y="146"><tspan fill="#e3b341">  Start time (HH:mm) — 0 to cancel: </tspan>10:00</text>
+<text x="22" y="165"><tspan fill="#e3b341">  End time   (HH:mm) — 0 to cancel: </tspan>12:00</text>
+<text x="22" y="184"></text>
+<text x="22" y="203"><tspan fill="#39c5cf">  [i]   Facility Type: [0] All  [1] Lecture Hall  [2] Discussion Room  [3] Sports Court  [4] Compute</tspan></text>
+<text x="22" y="222"><tspan fill="#39c5cf">r Lab  [5] Multipurpose Hall</tspan></text>
+<text x="22" y="241"><tspan fill="#e3b341">  Filter by type (0-5): </tspan>4</text>
+<text x="22" y="260"></text>
+<text x="22" y="279"><tspan fill="#3fb950">  [OK]  14 facility(ies) found:</tspan></text>
+<text x="22" y="298"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="317">  F031     Computer and Internet Lab K403      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="336">  F032     Computer and Internet Lab K404      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="355">  F033     Computer and Internet Lab K405      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="374">  F034     Computer and Internet Lab K406      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="393">  F035     Computer and Internet Lab K407      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="412">  F036     Computer and Internet Lab K408      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="431">  F037     Computer and Internet Lab K409      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="450">  F038     Computer and Internet Lab K410      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="469">  F039     Computer and Internet Lab K411      Cap: 40    KA Block, Level 4</text>
+<text x="22" y="488">  F092     LKC FES Computer Teaching Lab KB604 Cap: 40    KB Block, Level 6</text>
+<text x="22" y="507">  F093     LKC FES Computer Teaching Lab KB605 Cap: 40    KB Block, Level 6</text>
+<text x="22" y="526">  F094     LKC FES Computer Teaching Lab KB606 Cap: 40    KB Block, Level 6</text>
+<text x="22" y="545">  F095     LKC FES Computer Teaching Lab KB607 Cap: 40    KB Block, Level 6</text>
+<text x="22" y="564">  F096     LKC FES Computer Teaching Lab KB608 Cap: 40    KB Block, Level 6</text>
+<text x="22" y="583"></text>
+<text x="22" y="602"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>
