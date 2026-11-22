@@ -252,9 +252,3 @@ docs/                          class diagram and screenshots
 - **Records lost when text contained `|`.** The save code escaped `|` as `\|`, but the load code still split on it. A booking note like "Room A|B" was saved, then dropped without warning on the next start.
 - **Hard-coded year.** Dates were only accepted for 2026, so searching and booking would have stopped working on 1 January 2027. Impossible dates such as 31/02 were also accepted.
 - **Crash on end of input.** Pressing Ctrl+D (or Ctrl+Z on Windows) at a prompt crashed the program with a stack trace. It now exits cleanly.
-
-## Possible improvements
-
-- Hash passwords (for example with bcrypt) instead of storing them as plain text. Plain text was kept to match the scope of the assignment.
-- Move storage to a relational database such as MySQL through JDBC, so data isn't rewritten in full on every change and several people can use it at once.
-- Add a graphical or web front end on top of the existing service layer.
