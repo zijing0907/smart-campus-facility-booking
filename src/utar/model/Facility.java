@@ -92,6 +92,19 @@ public class Facility {
     }
 
     // ── Setters (only fields the admin is allowed to change) ─────────────────
+    // facilityId has no setter: bookings and reports refer to it, so it never changes.
+    public void setName(String n) {
+        this.name = n;
+    }
+    public void setType(FacilityType t) {
+        this.type = t;
+    }
+    public void setCapacity(int c) {
+        this.capacity = c;
+    }
+    public void setLocation(String l) {
+        this.location = l;
+    }
     public void setStatus(FacilityStatus s) {
         this.status = s;
     }

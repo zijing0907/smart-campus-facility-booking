@@ -1,4 +1,4 @@
-# reportId|facilityId|reportedBy|desc|category|status|assignedTo|reportedDate|resolvedDate|notes
-MR0001|F074|STU001|Air conditioning not working|AIR_CONDITIONING|IN_PROGRESS|MAINT01|15/04/2026|NULL|NULL
-MR0002|F031|STAFF01|Two computers have broken keyboards|EQUIPMENT_DAMAGE|RESOLVED|MAINT03|16/04/2026|18/04/2026|Keyboards replaced.
-MR0003|F040|STU005|Broken equipment in gymnasium|EQUIPMENT_DAMAGE|REPORTED|NULL|17/04/2026|NULL|NULL
+# reportId|facilityId|reportedBy|desc|category|status|assignedTo|reportedDate|resolvedDate|notes|attachment
+MR0001|F074|STU001|Air conditioning not working|AIR_CONDITIONING|IN_PROGRESS|MAINT01|15/04/2026|NULL|NULL|NULL
+MR0002|F031|STAFF01|Two computers have broken keyboards|EQUIPMENT_DAMAGE|RESOLVED|MAINT03|16/04/2026|18/04/2026|Keyboards replaced.|NULL
+MR0003|F040|STU005|Broken equipment in gymnasium|EQUIPMENT_DAMAGE|REPORTED|NULL|17/04/2026|NULL|NULL|NULL

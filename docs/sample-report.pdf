@@ -1,0 +1,219 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 6 0 R 8 0 R ] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Title (Facility Usage and Maintenance Report) /Producer (UTAR Smart Campus) /CreationDate (D:20261122134353) >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 6170 >>
+stream
+BT /F2 20 Tf 0.122 0.227 0.408 rg 40 781.89 Td (Facility Usage & Maintenance Report) Tj ET
+BT /F1 10 Tf 0.420 0.447 0.502 rg 40 763.89 Td (UTAR Smart Campus Facility System - Universiti Tunku Abdul Rahman, Sungai Long Campus) Tj ET
+BT /F1 10 Tf 0.420 0.447 0.502 rg 40 749.89 Td (Generated on 22/11/2026 at 13:43 by Admin Office.   Utilization period: All time.) Tj ET
+1 w 0.835 0.859 0.890 RG 40 737.89 m 555.28 737.89 l S
+BT /F2 13 Tf 0.133 0.133 0.133 rg 40 705.89 Td (Summary) Tj ET
+0.8 w 0.835 0.859 0.890 RG 40 639.89 121.32 56 re S
+BT /F1 8.5 Tf 0.420 0.447 0.502 rg 50 677.89 Td (Active bookings) Tj ET
+BT /F2 18 Tf 0.122 0.227 0.408 rg 50 653.89 Td (18) Tj ET
+0.8 w 0.835 0.859 0.890 RG 171.32 639.89 121.32 56 re S
+BT /F1 8.5 Tf 0.420 0.447 0.502 rg 181.32 677.89 Td (Waiting for approval) Tj ET
+BT /F2 18 Tf 0.122 0.227 0.408 rg 181.32 653.89 Td (12) Tj ET
+0.8 w 0.835 0.859 0.890 RG 302.64 639.89 121.32 56 re S
+BT /F1 8.5 Tf 0.420 0.447 0.502 rg 312.64 677.89 Td (Open maintenance reports) Tj ET
+BT /F2 18 Tf 0.122 0.227 0.408 rg 312.64 653.89 Td (3) Tj ET
+0.8 w 0.835 0.859 0.890 RG 433.96 639.89 121.32 56 re S
+BT /F1 8.5 Tf 0.420 0.447 0.502 rg 443.96 677.89 Td (Average repair time) Tj ET
+BT /F2 18 Tf 0.122 0.227 0.408 rg 443.96 653.89 Td (1.0 days) Tj ET
+BT /F2 13 Tf 0.133 0.133 0.133 rg 40 603.89 Td (Peak booking hours) Tj ET
+BT /F1 9 Tf 0.420 0.447 0.502 rg 40 585.89 Td (Number of active bookings that cover each hour of the day.) Tj ET
+0.8 w 0.835 0.859 0.890 RG 40 395.89 515.28 180 re S
+0.6 w 0.898 0.910 0.933 RG 74 417.89 m 541.28 417.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 414.89 Td (0) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 452.89 m 541.28 452.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 449.89 Td (2) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 487.89 m 541.28 487.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 484.89 Td (4) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 522.89 m 541.28 522.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 519.89 Td (6) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 557.89 m 541.28 557.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 554.89 Td (8) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 80.68 405.89 Td (08:00) Tj ET
+0.184 0.427 0.710 rg 114.05 417.89 20.03 52.5 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 121.84 474.39 Td (3) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 114.06 405.89 Td (09:00) Tj ET
+0.184 0.427 0.710 rg 147.43 417.89 20.03 87.5 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 155.22 509.39 Td (5) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 147.43 405.89 Td (10:00) Tj ET
+0.184 0.427 0.710 rg 180.81 417.89 20.03 52.5 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 188.6 474.39 Td (3) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 180.81 405.89 Td (11:00) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 214.19 405.89 Td (12:00) Tj ET
+0.184 0.427 0.710 rg 247.56 417.89 20.03 17.5 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 255.35 439.39 Td (1) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 247.57 405.89 Td (13:00) Tj ET
+0.184 0.427 0.710 rg 280.94 417.89 20.03 140 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 288.73 561.89 Td (8) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 280.94 405.89 Td (14:00) Tj ET
+0.184 0.427 0.710 rg 314.32 417.89 20.03 122.5 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 322.1 544.39 Td (7) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 314.32 405.89 Td (15:00) Tj ET
+0.184 0.427 0.710 rg 347.69 417.89 20.03 87.5 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 355.48 509.39 Td (5) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 347.7 405.89 Td (16:00) Tj ET
+0.184 0.427 0.710 rg 381.07 417.89 20.03 17.5 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 388.86 439.39 Td (1) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 381.07 405.89 Td (17:00) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 414.45 405.89 Td (18:00) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 447.83 405.89 Td (19:00) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 481.21 405.89 Td (20:00) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 514.58 405.89 Td (21:00) Tj ET
+0.8 w 0.420 0.447 0.502 RG 74 417.89 m 541.28 417.89 l S
+BT /F2 13 Tf 0.133 0.133 0.133 rg 40 359.89 Td (Bookings by facility type) Tj ET
+BT /F1 9 Tf 0.420 0.447 0.502 rg 40 341.89 Td (Active bookings only; cancelled and rejected bookings are not counted.) Tj ET
+0.8 w 0.835 0.859 0.890 RG 40 151.89 515.28 180 re S
+0.6 w 0.898 0.910 0.933 RG 74 183.89 m 541.28 183.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 180.89 Td (0) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 209.89 m 541.28 209.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 206.89 Td (3) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 235.89 m 541.28 235.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 232.89 Td (6) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 261.89 m 541.28 261.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 63.55 258.89 Td (9) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 287.89 m 541.28 287.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 59.1 284.89 Td (12) Tj ET
+0.6 w 0.898 0.910 0.933 RG 74 313.89 m 541.28 313.89 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 59.1 310.89 Td (15) Tj ET
+0.184 0.427 0.710 rg 92.69 183.89 56.07 112.67 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 116.28 300.56 Td (13) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 107.39 171.89 Td (Lecture) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 113.84 161.89 Td (Hall) Tj ET
+0.184 0.427 0.710 rg 186.15 183.89 56.07 34.67 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 211.96 222.56 Td (4) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 194.85 171.89 Td (Discussion) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 203.52 161.89 Td (Room) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 296.08 171.89 Td (Sports) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 297.86 161.89 Td (Court) Tj ET
+0.184 0.427 0.710 rg 373.06 183.89 56.07 8.67 re f
+BT /F1 8 Tf 0.133 0.133 0.133 rg 398.87 196.56 Td (1) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 383.54 171.89 Td (Computer) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 394.42 161.89 Td (Lab) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 471.66 171.89 Td (Multipurpose) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 487.66 161.89 Td (Hall) Tj ET
+0.8 w 0.420 0.447 0.502 RG 74 183.89 m 541.28 183.89 l S
+0.5 w 0.835 0.859 0.890 RG 40 36 m 555.28 36 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 40 24 Td (UTAR Smart Campus Facility System - report generated 22/11/2026 at 13:43) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 514.36 24 Td (Page 1 of 2) Tj ET
+
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 4646 >>
+stream
+BT /F2 13 Tf 0.133 0.133 0.133 rg 40 789.89 Td (Facility utilization - All time) Tj ET
+0.910 0.933 0.969 rg 40 759.89 515.28 20 re f
+BT /F2 9 Tf 0.122 0.227 0.408 rg 46 766.39 Td (ID) Tj ET
+BT /F2 9 Tf 0.122 0.227 0.408 rg 96 766.39 Td (Facility) Tj ET
+BT /F2 9 Tf 0.122 0.227 0.408 rg 296 766.39 Td (Type) Tj ET
+BT /F2 9 Tf 0.122 0.227 0.408 rg 415.13 766.39 Td (Bookings) Tj ET
+BT /F2 9 Tf 0.122 0.227 0.408 rg 483.12 766.39 Td (Issues \(all time\)) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 747.39 Td (F001) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 747.39 Td (Lecture Theatre KG01) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 296 747.39 Td (Lecture Hall) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 443.99 747.39 Td (13) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 747.39 Td (0) Tj ET
+0.961 0.969 0.980 rg 40 723.89 515.28 18 re f
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 729.39 Td (F011) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 729.39 Td (Tutorial Room K209) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 296 729.39 Td (Discussion Room) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 449 729.39 Td (4) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 729.39 Td (0) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 711.39 Td (F031) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 711.39 Td (Computer and Internet Lab K403) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 296 711.39 Td (Computer Lab) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 449 711.39 Td (1) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 711.39 Td (2) Tj ET
+0.961 0.969 0.980 rg 40 687.89 515.28 18 re f
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 693.39 Td (F005) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 693.39 Td (Lecture Room K402) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 296 693.39 Td (Lecture Hall) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 449 693.39 Td (0) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 693.39 Td (1) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 675.39 Td (F040) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 675.39 Td (Gymnasium) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 296 675.39 Td (Sports Court) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 449 675.39 Td (0) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 675.39 Td (1) Tj ET
+0.961 0.969 0.980 rg 40 651.89 515.28 18 re f
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 657.39 Td (F074) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 657.39 Td (Tutorial Room KB303) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 296 657.39 Td (Discussion Room) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 449 657.39 Td (0) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 657.39 Td (1) Tj ET
+0.8 w 0.835 0.859 0.890 RG 40 651.89 m 555.28 651.89 l S
+BT /F1 9 Tf 0.420 0.447 0.502 rg 40 633.89 Td (96 other facilities had no bookings in this period and no reported issues.) Tj ET
+BT /F2 13 Tf 0.133 0.133 0.133 rg 40 601.89 Td (Maintenance) Tj ET
+BT /F1 10 Tf 0.133 0.133 0.133 rg 40 581.89 Td (Total reports: 5      Open: 3      Resolved: 2      Average repair time: 1.0 days) Tj ET
+0.910 0.933 0.969 rg 40 545.89 515.28 20 re f
+BT /F2 9 Tf 0.122 0.227 0.408 rg 46 552.39 Td (ID) Tj ET
+BT /F2 9 Tf 0.122 0.227 0.408 rg 96 552.39 Td (Facility) Tj ET
+BT /F2 9 Tf 0.122 0.227 0.408 rg 311 552.39 Td (Location) Tj ET
+BT /F2 9 Tf 0.122 0.227 0.408 rg 522.5 552.39 Td (Cases) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 533.39 Td (F031) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 533.39 Td (Computer and Internet Lab K403) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 311 533.39 Td (KA Block, Level 4) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 533.39 Td (2) Tj ET
+0.961 0.969 0.980 rg 40 509.89 515.28 18 re f
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 515.39 Td (F005) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 515.39 Td (Lecture Room K402) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 311 515.39 Td (KA Block, Level 4) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 515.39 Td (1) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 497.39 Td (F040) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 497.39 Td (Gymnasium) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 311 497.39 Td (KA Block, Level 3) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 497.39 Td (1) Tj ET
+0.961 0.969 0.980 rg 40 473.89 515.28 18 re f
+BT /F1 9 Tf 0.133 0.133 0.133 rg 46 479.39 Td (F074) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 96 479.39 Td (Tutorial Room KB303) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 311 479.39 Td (KB Block, Level 3) Tj ET
+BT /F1 9 Tf 0.133 0.133 0.133 rg 544.28 479.39 Td (1) Tj ET
+0.8 w 0.835 0.859 0.890 RG 40 473.89 m 555.28 473.89 l S
+0.5 w 0.835 0.859 0.890 RG 40 36 m 555.28 36 l S
+BT /F1 8 Tf 0.420 0.447 0.502 rg 40 24 Td (UTAR Smart Campus Facility System - report generated 22/11/2026 at 13:43) Tj ET
+BT /F1 8 Tf 0.420 0.447 0.502 rg 514.36 24 Td (Page 2 of 2) Tj ET
+
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000129 00000 n 
+0000000226 00000 n 
+0000000328 00000 n 
+0000000459 00000 n 
+0000000601 00000 n 
+0000006823 00000 n 
+0000006965 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R /Info 5 0 R >>
+startxref
+11663
+%%EOF

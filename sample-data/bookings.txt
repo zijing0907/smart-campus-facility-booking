@@ -1,5 +1,5 @@
-# bookingId|userId|facilityId|date|start|end|purpose|desc|status|remark|reminderSent
-BK0001|STU001|F001|20/04/2026|09:00|11:00|ACADEMIC|Project presentation|APPROVED|NULL|false
-BK0002|STU002|F011|21/04/2026|14:00|16:00|ACADEMIC|FYP discussion|PENDING|NULL|false
-BK0003|STAFF01|F031|22/04/2026|10:00|12:00|ACADEMIC|Lab session|APPROVED|NULL|false
-BK0004|STU003|F099|23/04/2026|08:00|12:00|CO_CURRICULAR|Club event|PENDING|NULL|false
+# bookingId|userId|facilityId|date|start|end|purpose|desc|status|remark|reminderSent|attendees|seriesId
+BK0001|STU001|F001|20/04/2026|09:00|11:00|ACADEMIC|Project presentation|APPROVED|NULL|false|0|NULL
+BK0002|STU002|F011|21/04/2026|14:00|16:00|ACADEMIC|FYP discussion|PENDING|NULL|false|0|NULL
+BK0003|STAFF01|F031|22/04/2026|10:00|12:00|ACADEMIC|Lab session|APPROVED|NULL|false|0|NULL
+BK0004|STU003|F099|23/04/2026|08:00|12:00|CO_CURRICULAR|Club event|PENDING|NULL|false|0|NULL

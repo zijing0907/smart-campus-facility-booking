@@ -23,6 +23,8 @@ public class Booking {
     private BookingStatus status;        // current state of the booking
     private String adminRemark;   // remark left by admin on approve/reject
     private boolean reminderSent;  // true once the reminder has been shown
+    private int attendees;         // how many people are coming (0 = not recorded, older bookings)
+    private String seriesId;       // weekly series this belongs to, e.g. "RS0001" (null = one-off)
 
     /**
      * BookingPurpose — fixed list of allowed reasons for a booking.
@@ -125,6 +127,24 @@ public class Booking {
     }
     public void setReminderSent(boolean b) {
         this.reminderSent = b;
+    }
+
+    // ── Attendees and weekly series ──────────────────────────────────────────
+    public int getAttendees() {
+        return attendees;
+    }
+    public void setAttendees(int n) {
+        this.attendees = n;
+    }
+    public String getSeriesId() {
+        return seriesId;
+    }
+    public void setSeriesId(String id) {
+        this.seriesId = id;
+    }
+    /** true if this booking is one week of a repeating (weekly) booking. */
+    public boolean isRecurring() {
+        return seriesId != null;
     }
 
     /**

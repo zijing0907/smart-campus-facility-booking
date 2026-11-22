@@ -2,16 +2,28 @@ package utar.service;
 
 import utar.model.*;
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.LinkedHashMap;
 
 /**
  * AnalyticsService.java — Generates the summary reports required by the
  * assignment specification:
- *   • printFacilityTypeReport — bookings grouped by facility type
- *   • printUtilizationReport  — bookings + maintenance per facility,
- *                                with monthly / semester / yearly filter
- *   • printPeakHoursReport    — busiest hours of the day (with a bar chart)
- *   • printMaintenanceSummary — counts + average repair time
- *   • printUserStats          — a single user's own booking stats
+ *   • Facility type usage — bookings grouped by facility type
+ *   • Facility utilization — bookings + maintenance per facility,
+ *                            with monthly / semester / yearly filter
+ *   • Peak booking hours  — busiest hours of the day
+ *   • Maintenance summary — counts + average repair time
+ *   • User stats          — a single user's own booking stats
+ *
+ * Each report has two methods:
+ *   • getXxx()   — works out the numbers and RETURNS them. It never
+ *                  prints, so any front end can use it: the console
+ *                  menus, the Swing GUI, or a future web page.
+ *   • printXxx() — calls getXxx() and prints the result as a text table
+ *                  for the console menus.
+ * Keeping the calculation separate from the display is the same layering
+ * idea as the rest of the project: the service decides WHAT the numbers
+ * are, the UI decides HOW they look.
  *
  * All numbers come from DataStore, so the reports always reflect the
  * latest state of the system.
@@ -21,18 +33,22 @@ public class AnalyticsService {
     // Single shared DataStore for all reads.
     private DataStore ds = DataStore.getInstance();
 
+    /** First and last hour shown in the peak-hours report (UTAR operating window). */
+    public static final int FIRST_REPORT_HOUR = 8;
+    public static final int LAST_REPORT_HOUR  = 21;
+
     // ─────────────────────────────────────────────────────────────────────────
     //  1) Facility-Type Usage Report
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
-     * printFacilityTypeReport — for every facility type (LECTURE_HALL,
+     * getBookingsByType — for every facility type (LECTURE_HALL,
      * COMPUTER_LAB, etc.), count how many active bookings exist.
      * Cancelled and rejected bookings are not counted.
+     * A LinkedHashMap keeps the types in the same order as the enum.
      */
-    public void printFacilityTypeReport() {
-        System.out.println("  Facility Type | Bookings");
-        System.out.println("  " + "-".repeat(35));
+    public LinkedHashMap<Facility.FacilityType, Integer> getBookingsByType() {
+        LinkedHashMap<Facility.FacilityType, Integer> result = new LinkedHashMap<>();
 
         // For each facility type → count active bookings whose facility has that type
         for (Facility.FacilityType type : Facility.FacilityType.values()) {
@@ -40,8 +56,7 @@ public class AnalyticsService {
 
             for (Booking b : ds.getAllBookings()) {
                 // Skip cancelled / rejected — they don't represent real usage
-                if (b.getStatus() == Booking.BookingStatus.CANCELLED) continue;
-                if (b.getStatus() == Booking.BookingStatus.REJECTED)  continue;
+                if (!isActive(b)) continue;
 
                 Facility f = ds.getFacilityById(b.getFacilityId());
                 if (f != null && f.getType() == type) {
@@ -49,7 +64,20 @@ public class AnalyticsService {
                 }
             }
 
-            System.out.printf("  %-22s| %d%n", type.name(), count);
+            result.put(type, count);
+        }
+
+        return result;
+    }
+
+    /** printFacilityTypeReport — console version of getBookingsByType(). */
+    public void printFacilityTypeReport() {
+        System.out.println("  Facility Type | Bookings");
+        System.out.println("  " + "-".repeat(35));
+
+        LinkedHashMap<Facility.FacilityType, Integer> counts = getBookingsByType();
+        for (Facility.FacilityType type : counts.keySet()) {
+            System.out.printf("  %-22s| %d%n", type.name(), counts.get(type));
         }
     }
 
@@ -58,8 +86,9 @@ public class AnalyticsService {
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
-     * printUtilizationReport — show booking count + maintenance count for
-     * every facility, optionally filtered by a time period.
+     * getBookingsPerFacility — count active bookings for every facility,
+     * optionally filtered by a time period.  The maintenance count for
+     * each facility is available from Facility.getMaintenanceCount().
      *
      * @param period one of "ALL" / "MONTHLY" / "SEMESTER" / "YEARLY"
      * @param value  meaning depends on period:
@@ -68,25 +97,36 @@ public class AnalyticsService {
      *                   YEARLY   → "yyyy"        (e.g. "2026")
      *                   ALL      → ignored
      */
-    public void printUtilizationReport(String period, String value) {
-        System.out.println("  Facility | Bookings | Maint Issues");
-        System.out.println("  " + "-".repeat(55));
+    public LinkedHashMap<Facility, Integer> getBookingsPerFacility(String period, String value) {
+        LinkedHashMap<Facility, Integer> result = new LinkedHashMap<>();
 
         for (Facility f : ds.getAllFacilities()) {
             int bookCount = 0;
 
             // Count active bookings of this facility that fall within the period
             for (Booking b : ds.getBookingsByFacility(f.getFacilityId())) {
-                if (b.getStatus() == Booking.BookingStatus.CANCELLED) continue;
-                if (b.getStatus() == Booking.BookingStatus.REJECTED)  continue;
+                if (!isActive(b)) continue;
 
                 if (matchesPeriod(b.getDate(), period, value)) {
                     bookCount++;
                 }
             }
 
+            result.put(f, bookCount);
+        }
+
+        return result;
+    }
+
+    /** printUtilizationReport — console version of getBookingsPerFacility(). */
+    public void printUtilizationReport(String period, String value) {
+        System.out.println("  Facility | Bookings | Maint Issues");
+        System.out.println("  " + "-".repeat(55));
+
+        LinkedHashMap<Facility, Integer> counts = getBookingsPerFacility(period, value);
+        for (Facility f : counts.keySet()) {
             System.out.printf("  %-32s| %-9d| %d%n",
-                              f.getName(), bookCount, f.getMaintenanceCount());
+                              f.getName(), counts.get(f), f.getMaintenanceCount());
         }
     }
 
@@ -149,20 +189,18 @@ public class AnalyticsService {
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
-     * printPeakHoursReport — find which hours of the day are most popular.
+     * getBookingsPerHour — find which hours of the day are most popular.
      *
      * For each booking we add 1 to every hour it spans (e.g. 09:00-11:00
-     * adds 1 to hour 9 and 1 to hour 10).  We then print a tiny ASCII bar
-     * chart — each '#' equals one booking-hour.
+     * adds 1 to hour 9 and 1 to hour 10).
      *
-     * We display 08:00 → 21:00 because that's UTAR's typical operating window.
+     * @return an array of 24 counts, where index = hour of the day
      */
-    public void printPeakHoursReport() {
+    public int[] getBookingsPerHour() {
         int[] hourCount = new int[24];   // index = hour-of-day
 
         for (Booking b : ds.getAllBookings()) {
-            if (b.getStatus() == Booking.BookingStatus.CANCELLED) continue;
-            if (b.getStatus() == Booking.BookingStatus.REJECTED)  continue;
+            if (!isActive(b)) continue;
 
             try {
                 // Take only the "HH" part of the HH:mm strings
@@ -178,10 +216,20 @@ public class AnalyticsService {
             }
         }
 
-        // Print the bar chart
+        return hourCount;
+    }
+
+    /**
+     * printPeakHoursReport — console version of getBookingsPerHour().
+     * Prints a tiny ASCII bar chart — each '#' equals one booking-hour.
+     * We display 08:00 → 21:00 because that's UTAR's typical operating window.
+     */
+    public void printPeakHoursReport() {
+        int[] hourCount = getBookingsPerHour();
+
         System.out.println("  Hour   | Count | Bar");
         System.out.println("  " + "-".repeat(40));
-        for (int h = 8; h <= 21; h++) {
+        for (int h = FIRST_REPORT_HOUR; h <= LAST_REPORT_HOUR; h++) {
             System.out.printf("  %02d:00  | %-6d| %s%n",
                               h, hourCount[h], "#".repeat(hourCount[h]));
         }
@@ -192,12 +240,44 @@ public class AnalyticsService {
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
-     * printMaintenanceSummary — summary of the maintenance side:
-     *   • total / open / resolved counts
-     *   • average repair time in days (RESOLVED reports only)
-     *   • per-facility maintenance counts (only those with > 0 cases)
+     * MaintenanceSummary — the numbers behind the maintenance summary
+     * report, bundled into one small object so a method can return them
+     * all at once.  Fields are private and read-only (Encapsulation).
      */
-    public void printMaintenanceSummary() {
+    public static class MaintenanceSummary {
+        private final int total;
+        private final int open;
+        private final int resolved;
+        private final int totalRepairDays;   // sum of days taken to fix
+        private final int repairCount;       // reports included in that sum
+
+        public MaintenanceSummary(int total, int open, int resolved,
+                                  int totalRepairDays, int repairCount) {
+            this.total           = total;
+            this.open            = open;
+            this.resolved        = resolved;
+            this.totalRepairDays = totalRepairDays;
+            this.repairCount     = repairCount;
+        }
+
+        public int getTotal()    { return total; }
+        public int getOpen()     { return open; }
+        public int getResolved() { return resolved; }
+
+        /** true when at least one resolved report has valid dates. */
+        public boolean hasAverageRepairTime() { return repairCount > 0; }
+
+        /** Average days from report to fix; only meaningful if hasAverageRepairTime(). */
+        public double getAverageRepairDays() {
+            return repairCount == 0 ? 0 : (double) totalRepairDays / repairCount;
+        }
+    }
+
+    /**
+     * getMaintenanceSummary — total / open / resolved counts and the
+     * average repair time in days (RESOLVED reports only).
+     */
+    public MaintenanceSummary getMaintenanceSummary() {
         ArrayList<MaintenanceReport> all = ds.getAllReports();
 
         int total = all.size();
@@ -220,26 +300,44 @@ public class AnalyticsService {
             }
         }
 
+        return new MaintenanceSummary(total, open, resolved, totalDays, repairCount);
+    }
+
+    /**
+     * getMaintenanceCasesPerFacility — every facility that has had at
+     * least one maintenance issue, with its issue count.
+     */
+    public LinkedHashMap<Facility, Integer> getMaintenanceCasesPerFacility() {
+        LinkedHashMap<Facility, Integer> result = new LinkedHashMap<>();
+        for (Facility f : ds.getAllFacilities()) {
+            // Skip the facilities that have never had an issue
+            if (f.getMaintenanceCount() > 0) {
+                result.put(f, f.getMaintenanceCount());
+            }
+        }
+        return result;
+    }
+
+    /** printMaintenanceSummary — console version of the two methods above. */
+    public void printMaintenanceSummary() {
+        MaintenanceSummary s = getMaintenanceSummary();
+
         // ── Print the totals ────────────────────────────────────────────────
-        System.out.printf("  Total Reports  : %d%n", total);
-        System.out.printf("  Open           : %d%n", open);
-        System.out.printf("  Resolved       : %d%n", resolved);
+        System.out.printf("  Total Reports  : %d%n", s.getTotal());
+        System.out.printf("  Open           : %d%n", s.getOpen());
+        System.out.printf("  Resolved       : %d%n", s.getResolved());
 
         // Show the average only when we have at least one resolved report
-        if (repairCount > 0) {
-            System.out.printf("  Avg Repair Time: %.1f day(s)%n",
-                              (double) totalDays / repairCount);
+        if (s.hasAverageRepairTime()) {
+            System.out.printf("  Avg Repair Time: %.1f day(s)%n", s.getAverageRepairDays());
         }
 
         // ── Per-facility breakdown ──────────────────────────────────────────
         System.out.println();
         System.out.println("  Maintenance cases per facility:");
-        for (Facility f : ds.getAllFacilities()) {
-            // Skip the facilities that have never had an issue
-            if (f.getMaintenanceCount() > 0) {
-                System.out.printf("  %-35s: %d case(s)%n",
-                                  f.getName(), f.getMaintenanceCount());
-            }
+        LinkedHashMap<Facility, Integer> cases = getMaintenanceCasesPerFacility();
+        for (Facility f : cases.keySet()) {
+            System.out.printf("  %-35s: %d case(s)%n", f.getName(), cases.get(f));
         }
     }
 
@@ -264,33 +362,41 @@ public class AnalyticsService {
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
-     * printUserStats — a single user's own booking stats.
-     * Counts how many of their bookings are PENDING / APPROVED / REJECTED /
-     * CANCELLED and prints a small report.
+     * getUserBookingCounts — how many of one user's bookings are
+     * PENDING / APPROVED / REJECTED / CANCELLED.  Every status is present
+     * in the map, with 0 if the user has none.
      */
-    public void printUserStats(String userId) {
-        ArrayList<Booking> list = ds.getBookingsByUser(userId);
-
-        int pending = 0, approved = 0, rejected = 0, cancelled = 0;
-
-        // Count by status using a switch — clearer than nested if/else
-        for (Booking b : list) {
-            switch (b.getStatus()) {
-                case PENDING: pending++;
-                break;
-                case APPROVED:  approved++;
-                break;
-                case REJECTED:  rejected++;
-                break;
-                case CANCELLED: cancelled++;
-                break;
-            }
+    public EnumMap<Booking.BookingStatus, Integer> getUserBookingCounts(String userId) {
+        EnumMap<Booking.BookingStatus, Integer> counts = new EnumMap<>(Booking.BookingStatus.class);
+        for (Booking.BookingStatus s : Booking.BookingStatus.values()) {
+            counts.put(s, 0);
         }
 
-        System.out.printf("  Total Bookings : %d%n", list.size());
-        System.out.printf("  Approved       : %d%n", approved);
-        System.out.printf("  Pending        : %d%n", pending);
-        System.out.printf("  Rejected       : %d%n", rejected);
-        System.out.printf("  Cancelled      : %d%n", cancelled);
+        for (Booking b : ds.getBookingsByUser(userId)) {
+            counts.put(b.getStatus(), counts.get(b.getStatus()) + 1);
+        }
+        return counts;
+    }
+
+    /** printUserStats — console version of getUserBookingCounts(). */
+    public void printUserStats(String userId) {
+        EnumMap<Booking.BookingStatus, Integer> c = getUserBookingCounts(userId);
+        int total = ds.getBookingsByUser(userId).size();
+
+        System.out.printf("  Total Bookings : %d%n", total);
+        System.out.printf("  Approved       : %d%n", c.get(Booking.BookingStatus.APPROVED));
+        System.out.printf("  Pending        : %d%n", c.get(Booking.BookingStatus.PENDING));
+        System.out.printf("  Rejected       : %d%n", c.get(Booking.BookingStatus.REJECTED));
+        System.out.printf("  Cancelled      : %d%n", c.get(Booking.BookingStatus.CANCELLED));
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  Helper
+    // ─────────────────────────────────────────────────────────────────────────
+
+    /** isActive — cancelled and rejected bookings don't count as real usage. */
+    private boolean isActive(Booking b) {
+        return b.getStatus() != Booking.BookingStatus.CANCELLED
+            && b.getStatus() != Booking.BookingStatus.REJECTED;
     }
 }

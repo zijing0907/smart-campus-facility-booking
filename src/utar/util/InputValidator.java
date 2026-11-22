@@ -2,6 +2,8 @@ package utar.util;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * InputValidator.java — Static utility class for checking user input.
@@ -241,5 +243,32 @@ public class InputValidator {
      */
     public static boolean isWithinOperatingHours(String start, String end) {
         return start.compareTo("08:00") >= 0 && end.compareTo("22:00") <= 0;
+    }
+
+    /**
+     * isPastDate — true if a dd/MM/yyyy date is before today.
+     * isValidDate() only checks the year, so on its own it would still
+     * accept e.g. 05/01 in November.  Call isValidDate() first.
+     */
+    public static boolean isPastDate(String date) {
+        return toLocalDate(date).isBefore(LocalDate.now());
+    }
+
+    /**
+     * hasStarted — true if a slot starting at date + HH:mm is now or
+     * earlier, i.e. it can no longer be booked.  Covers both past days
+     * and earlier times today.  Call isValidDate() and isValidTime() first.
+     */
+    public static boolean hasStarted(String date, String startTime) {
+        LocalDateTime start = LocalDateTime.of(toLocalDate(date),
+                LocalTime.of(toMinutes(startTime) / 60, toMinutes(startTime) % 60));
+        return !start.isAfter(LocalDateTime.now());
+    }
+
+    /** toLocalDate — "25/11/2026" -> LocalDate 2026-11-25 (no regex, same as isValidDate). */
+    private static LocalDate toLocalDate(String date) {
+        return LocalDate.of(Integer.parseInt(date.substring(6, 10)),
+                            Integer.parseInt(date.substring(3, 5)),
+                            Integer.parseInt(date.substring(0, 2)));
     }
 }
