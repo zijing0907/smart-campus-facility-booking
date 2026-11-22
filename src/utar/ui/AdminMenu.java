@@ -149,9 +149,9 @@ public class AdminMenu {
             User u     = ds.getUserById(b.getUserId());
             Facility f = ds.getFacilityById(b.getFacilityId());
 
-            System.out.printf("  %s[%d]%s %-8s  User: %-20s  Facility: %s%n",
+            System.out.printf("  %s[%d]%s %-8s  User: %-28s  Facility: %s%n",
                     ConsoleUI.YELLOW, i + 1, ConsoleUI.RESET,
-                    b.getBookingId(), u != null ? u.getName() : b.getUserId(),
+                    b.getBookingId(), ConsoleUI.fit(u != null ? u.getName() : b.getUserId(), 28),
                     f != null ? f.getName() : b.getFacilityId());
 
             System.out.printf("          Date: %s  %s-%s  Purpose: %s  People: %s%n",
@@ -228,9 +228,9 @@ public class AdminMenu {
                     : b.getStatus() == Booking.BookingStatus.PENDING ? ConsoleUI.YELLOW
                     : ConsoleUI.RED;
 
-            System.out.printf("  %-8s %-20s %-28s %s%-10s%s %s%n",
-                    b.getBookingId(), u != null ? u.getName() : b.getUserId(),
-                    f != null ? f.getName() : b.getFacilityId(),
+            System.out.printf("  %-8s %-23s %-31s %s%-9s%s %s%n",
+                    b.getBookingId(), ConsoleUI.fit(u != null ? u.getName() : b.getUserId(), 23),
+                    ConsoleUI.fit(f != null ? f.getName() : b.getFacilityId(), 31),
                     col, b.getStatus(), ConsoleUI.RESET,
                     b.getDate() + " " + b.getStartTime() + "-" + b.getEndTime());
             count++;
@@ -322,21 +322,21 @@ public class AdminMenu {
             String col = r.getStatus() == MaintenanceReport.ReportStatus.RESOLVED
                     ? ConsoleUI.GREEN : ConsoleUI.YELLOW;
 
-            System.out.printf(" %-8s %-28s %s%-12s%s [%s]%n",
-                    r.getReportId(), f != null ? f.getName() : r.getFacilityId(),
+            System.out.printf("  %-8s %-35s %s%-12s%s [%s]%n",
+                    r.getReportId(), ConsoleUI.fit(f != null ? f.getName() : r.getFacilityId(), 35),
                     col, r.getStatus(), ConsoleUI.RESET, r.getCategory());
 
-            System.out.printf(" By: %-20s  Issue: %s%n",
-                    reporter != null ? reporter.getName() : r.getReportedByUserId(),
+            System.out.printf("  By: %-28s  Issue: %s%n",
+                    ConsoleUI.fit(reporter != null ? reporter.getName() : r.getReportedByUserId(), 28),
                     r.getIssueDescription());
 
             if (r.getAssignedTo() != null) {
                 User assigned = ds.getUserById(r.getAssignedTo());
-                System.out.printf(" Assigned to: %s%n",
+                System.out.printf("  Assigned to: %s%n",
                         assigned != null ? assigned.getName() : r.getAssignedTo());
             }
             if (r.hasAttachment()) {
-                System.out.printf(" Attachment: %s%n", ds.getAttachmentFile(r.getAttachment()).getPath());
+                System.out.printf("  Attachment: %s%n", ds.getAttachmentFile(r.getAttachment()).getPath());
             }
             ConsoleUI.printDivider();
         }
@@ -368,9 +368,9 @@ public class AdminMenu {
         for (int i = 0; i < open.size(); i++) {
             MaintenanceReport r = open.get(i);
             Facility f = ds.getFacilityById(r.getFacilityId());
-            System.out.printf("  %s[%d]%s %-8s %-28s [%s] %s%n",
+            System.out.printf("  %s[%d]%s %-8s %-35s [%s] %s%n",
                     ConsoleUI.YELLOW, i + 1, ConsoleUI.RESET,
-                    r.getReportId(), f != null ? f.getName() : r.getFacilityId(),
+                    r.getReportId(), ConsoleUI.fit(f != null ? f.getName() : r.getFacilityId(), 35),
                     r.getCategory(), r.getIssueDescription());
         }
 
@@ -582,13 +582,13 @@ public class AdminMenu {
         ConsoleUI.clearScreen();
         ConsoleUI.printSection("ALL REGISTERED USERS");
 
-        System.out.printf("  %-10s %-25s %-35s %-15s %-10s%n",
+        System.out.printf("  %-8s %-28s %-28s %-14s %s%n",
                 "ID", "Name", "Email", "Contact", "Role");
         ConsoleUI.printDivider();
 
         for (User u : ds.getAllUsers()) {
-            System.out.printf("  %-10s %-25s %-35s %-15s %-10s%n",
-                    u.getUserId(), u.getName(), u.getEmail(),
+            System.out.printf("  %-8s %-28s %-28s %-14s %s%n",
+                    u.getUserId(), ConsoleUI.fit(u.getName(), 28), ConsoleUI.fit(u.getEmail(), 28),
                     u.getContactNumber(), u.getRoleLabel());
         }
 
@@ -618,16 +618,16 @@ public class AdminMenu {
             return;
         }
 
-        System.out.printf("  %-8s %-28s %-14s %-12s %-20s%n",
+        System.out.printf("  %-8s %-35s %-17s %-12s %s%n",
                 "ID", "Facility", "Category", "Status", "Assigned To");
         ConsoleUI.printDivider();
 
         for (MaintenanceReport r : open) {
             Facility f  = ds.getFacilityById(r.getFacilityId());
             User assigned = r.getAssignedTo() != null ? ds.getUserById(r.getAssignedTo()) : null;
-            System.out.printf("  %-8s %-28s %-14s %-12s %-20s%n",
+            System.out.printf("  %-8s %-35s %-17s %-12s %s%n",
                     r.getReportId(),
-                    f != null ? f.getName() : r.getFacilityId(),
+                    ConsoleUI.fit(f != null ? f.getName() : r.getFacilityId(), 35),
                     r.getCategory(),
                     r.getStatus(),
                     assigned != null ? assigned.getName() : "Unassigned");
@@ -661,7 +661,7 @@ public class AdminMenu {
 
             for (Booking b : bookingService.getUserBookings(u.getUserId()))
 
-                if (b.getStatus() == Booking.BookingStatus.APPROVED) count++;
+                if (isUpcomingApproved(b)) count++;
 
             if (count > 0) {
                 usersWithBookings.add(u);
@@ -682,9 +682,9 @@ public class AdminMenu {
 
         for (int i = 0; i < usersWithBookings.size(); i++) {
             User u = usersWithBookings.get(i);
-            System.out.printf("  %s[%d]%s %-8s %-25s (%d booking%s)%n",
+            System.out.printf("  %s[%d]%s %-8s %-28s (%d booking%s)%n",
                     ConsoleUI.YELLOW, i + 1, ConsoleUI.RESET,
-                    u.getUserId(), u.getName(),
+                    u.getUserId(), ConsoleUI.fit(u.getName(), 28),
                     bookingCounts.get(i), bookingCounts.get(i) == 1 ? "" : "s");
         }
 
@@ -700,7 +700,7 @@ public class AdminMenu {
 
         for (Booking b : bookingService.getUserBookings(chosen.getUserId())) {
 
-            if (b.getStatus() != Booking.BookingStatus.APPROVED)
+            if (!isUpcomingApproved(b))
                 continue;
             Facility f = ds.getFacilityById(b.getFacilityId());
             System.out.printf("    -> %s - %s at %s%n",
@@ -708,5 +708,11 @@ public class AdminMenu {
                     b.getDate(), b.getStartTime());
         }
         ConsoleUI.pressEnter(sc);
+    }
+
+    /** A reminder is only useful for an approved booking that has not started yet. */
+    private boolean isUpcomingApproved(Booking b) {
+        return b.getStatus() == Booking.BookingStatus.APPROVED
+                && !InputValidator.hasStarted(b.getDate(), b.getStartTime());
     }
 }

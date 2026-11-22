@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="705" height="629" viewBox="0 0 705 629" role="img" aria-label="Report a facility issue with a photo">
+<title>Report a facility issue with a photo</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="705" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="704" height="628" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="352.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Report a facility issue with a photo</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- REPORT FACILITY ISSUE -----------------------------</tspan></text>
+<text x="22" y="89"></text>
+<text x="22" y="108">  <tspan fill="#e3b341">[0]</tspan> Back</text>
+<text x="22" y="127">  <tspan fill="#e3b341">[1]</tspan> Lecture Theatre KG01</text>
+<text x="22" y="146">  <tspan fill="#e3b341">[2]</tspan> Lecture Theatre KG02</text>
+<text x="22" y="165">  <tspan fill="#e3b341">[3]</tspan> Lecture Theatre KG03</text>
+<text x="22" y="184">  <tspan fill="#e3b341">[4]</tspan> Lecture Room K401</text>
+<text x="22" y="203">  <tspan fill="#e3b341">[5]</tspan> Lecture Room K402</text>
+<text x="22" y="222">  <tspan fill="#e3b341">[6]</tspan> Lecture Room K506</text>
+<text x="22" y="241">  <tspan fill="#e3b341">[7]</tspan> Lecture Room K512</text>
+<text x="22" y="260"><tspan fill="#8b949e">  ⋮ 93 more</tspan></text>
+<text x="22" y="279">  <tspan fill="#e3b341">[101]</tspan> Multipurpose Area (KB Level 1)</text>
+<text x="22" y="298">  <tspan fill="#e3b341">[102]</tspan> Meeting Room (KB Ground)</text>
+<text x="22" y="317"><tspan fill="#e3b341">  Select facility (0-102): </tspan>5</text>
+<text x="22" y="336"></text>
+<text x="22" y="355">  Issue Category:</text>
+<text x="22" y="374">  <tspan fill="#e3b341">[1]</tspan> EQUIPMENT_DAMAGE</text>
+<text x="22" y="393">  <tspan fill="#e3b341">[2]</tspan> AIR_CONDITIONING</text>
+<text x="22" y="412">  <tspan fill="#e3b341">[3]</tspan> FURNITURE</text>
+<text x="22" y="431">  <tspan fill="#e3b341">[4]</tspan> ELECTRICAL</text>
+<text x="22" y="450">  <tspan fill="#e3b341">[5]</tspan> OTHER</text>
+<text x="22" y="469">  <tspan fill="#e3b341">[0]</tspan> Back</text>
+<text x="22" y="488"><tspan fill="#e3b341">  Select category (0-5): </tspan>1</text>
+<text x="22" y="507"><tspan fill="#e3b341">  Describe the issue: </tspan>Projector flickers during lectures</text>
+<text x="22" y="526"><tspan fill="#e3b341">  Today's date (dd/MM/yyyy): </tspan>22/11/2026</text>
+<text x="22" y="545"><tspan fill="#e3b341">  Attach a photo or PDF (full file path, ENTER to skip): </tspan>projector-photo.jpg</text>
+<text x="22" y="564"><tspan fill="#3fb950">  [OK]  Report MR0006 submitted successfully with your attachment.</tspan></text>
+<text x="22" y="583"></text>
+<text x="22" y="602"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

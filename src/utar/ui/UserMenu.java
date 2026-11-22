@@ -203,8 +203,9 @@ public class UserMenu {
             ConsoleUI.printWarning("Note: Operating hours are 08:00 – 22:00.");
 
         System.out.println();
-        ConsoleUI.printInfo("Facility Type: [0] All  [1] Lecture Hall  [2] Discussion Room" +
-                "  [3] Sports Court  [4] Computer Lab  [5] Multipurpose Hall");
+        ConsoleUI.printInfo("Facility Type:");
+        System.out.println("  [0] All  [1] Lecture Hall  [2] Discussion Room  [3] Sports Court");
+        System.out.println("  [4] Computer Lab  [5] Multipurpose Hall");
         int t = ConsoleUI.promptInt(sc, "Filter by type", 0, 5);
         Facility.FacilityType type = null;
         if (t > 0) type = Facility.FacilityType.values()[t - 1];
@@ -219,7 +220,7 @@ public class UserMenu {
             ConsoleUI.printDivider();
             for (Facility f : results) {
                 System.out.printf("  %-8s %-35s Cap: %-5d %s%n",
-                        f.getFacilityId(), f.getName(), f.getCapacity(), f.getLocation());
+                        f.getFacilityId(), ConsoleUI.fit(f.getName(), 35), f.getCapacity(), f.getLocation());
             }
         }
         ConsoleUI.pressEnter(sc);
@@ -310,7 +311,7 @@ public class UserMenu {
             Facility f = available.get(i);
             System.out.printf("  %s[%d]%s %-35s Cap: %-5d %s%n",
                     ConsoleUI.YELLOW, i + 1, ConsoleUI.RESET,
-                    f.getName(), f.getCapacity(), f.getLocation());
+                    ConsoleUI.fit(f.getName(), 35), f.getCapacity(), f.getLocation());
         }
         int sel = ConsoleUI.promptInt(sc, "Select facility", 0, available.size());
         if (sel == 0) return;
@@ -362,9 +363,9 @@ public class UserMenu {
             String statusColor = b.getStatus() == Booking.BookingStatus.APPROVED ? ConsoleUI.GREEN
                     : b.getStatus() == Booking.BookingStatus.PENDING ? ConsoleUI.YELLOW
                     : ConsoleUI.RED;
-            System.out.printf("  %s%-8s%s %-30s %s%-10s%s %s %s-%s%n",
+            System.out.printf("  %s%-8s%s %-35s %s%-10s%s %s %s-%s%n",
                     ConsoleUI.CYAN, b.getBookingId(), ConsoleUI.RESET,
-                    f != null ? f.getName() : b.getFacilityId(),
+                    ConsoleUI.fit(f != null ? f.getName() : b.getFacilityId(), 35),
                     statusColor, b.getStatus(), ConsoleUI.RESET,
                     b.getDate(), b.getStartTime(), b.getEndTime());
             System.out.printf("           Purpose: %-15s  People: %-5s %s%n",
@@ -631,8 +632,8 @@ public class UserMenu {
         ConsoleUI.printDivider();
         for (Booking b : bookingService.getUserBookings(currentUser.getUserId())) {
             Facility f = ds.getFacilityById(b.getFacilityId());
-            System.out.printf("  %-8s %-30s %-12s %s %s-%s%n",
-                    b.getBookingId(), f != null ? f.getName() : b.getFacilityId(),
+            System.out.printf("  %-8s %-35s %-12s %s %s-%s%n",
+                    b.getBookingId(), ConsoleUI.fit(f != null ? f.getName() : b.getFacilityId(), 35),
                     b.getStatus(), b.getDate(), b.getStartTime(), b.getEndTime());
         }
         ConsoleUI.pressEnter(sc);

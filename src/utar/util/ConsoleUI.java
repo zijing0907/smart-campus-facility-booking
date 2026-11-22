@@ -81,6 +81,15 @@ public class ConsoleUI {
         System.out.printf("  %-25s %s%s%s%n", CYAN + label + ":" + RESET, WHITE, value, RESET);
     }
 
+    /**
+     * fit - keep a table cell inside its column.  Text longer than the column
+     * is cut and ends with "..." so the next column still lines up.
+     */
+    public static String fit(String text, int width) {
+        if (text == null) return "";
+        return text.length() <= width ? text : text.substring(0, width - 3) + "...";
+    }
+
     // Prints a horizontal divider line
     public static void printDivider() {
         System.out.println(CYAN + "  " + "-".repeat(55) + RESET);

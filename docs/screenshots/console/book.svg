@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="696" height="591" viewBox="0 0 696 591" role="img" aria-label="Book a facility">
+<title>Book a facility</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="696" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="695" height="590" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="348.0" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Book a facility</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- BOOK A FACILITY -----------------------------------</tspan></text>
+<text x="22" y="89"></text>
+<text x="22" y="108"><tspan fill="#e3b341">  Date (dd/MM/yyyy) — 0 to cancel: </tspan>25/11/2026</text>
+<text x="22" y="127"><tspan fill="#39c5cf">  [i]   Use 24-hour time, e.g. 14:00 for 2pm.</tspan></text>
+<text x="22" y="146"><tspan fill="#e3b341">  Start time (HH:mm) — 0 to cancel: </tspan>14:00</text>
+<text x="22" y="165"><tspan fill="#e3b341">  End time   (HH:mm) — 0 to cancel: </tspan>16:00</text>
+<text x="22" y="184"><tspan fill="#e3b341">  Number of people attending (1-1000): </tspan>35</text>
+<text x="22" y="203"></text>
+<text x="22" y="222">  <tspan fill="#e3b341">[0]</tspan> Back</text>
+<text x="22" y="241">  <tspan fill="#e3b341">[1]</tspan> Lecture Theatre KG01                Cap: 250   KA Block, Ground Floor</text>
+<text x="22" y="260">  <tspan fill="#e3b341">[2]</tspan> Lecture Theatre KG02                Cap: 250   KA Block, Ground Floor</text>
+<text x="22" y="279">  <tspan fill="#e3b341">[3]</tspan> Lecture Theatre KG03                Cap: 250   KA Block, Ground Floor</text>
+<text x="22" y="298">  <tspan fill="#e3b341">[4]</tspan> Lecture Room K401                   Cap: 80    KA Block, Level 4</text>
+<text x="22" y="317">  <tspan fill="#e3b341">[5]</tspan> Lecture Room K402                   Cap: 80    KA Block, Level 4</text>
+<text x="22" y="336">  <tspan fill="#e3b341">[6]</tspan> Lecture Room K506                   Cap: 80    KA Block, Level 5</text>
+<text x="22" y="355">  <tspan fill="#e3b341">[7]</tspan> Lecture Room K512                   Cap: 80    KA Block, Level 5</text>
+<text x="22" y="374"><tspan fill="#8b949e">  ⋮ 48 more</tspan></text>
+<text x="22" y="393">  <tspan fill="#e3b341">[56]</tspan> CFS Multipurpose Hall               Cap: 300   KB Block, Level 5</text>
+<text x="22" y="412">  <tspan fill="#e3b341">[57]</tspan> Multipurpose Area (KB Level 1)      Cap: 150   KB Block, Level 1</text>
+<text x="22" y="431"><tspan fill="#e3b341">  Select facility (0-57): </tspan>1</text>
+<text x="22" y="450"></text>
+<text x="22" y="469">  [0] Back  [1] Academic  [2] Co-Curricular  [3] Official</text>
+<text x="22" y="488"><tspan fill="#e3b341">  Purpose (0-3): </tspan>1</text>
+<text x="22" y="507"><tspan fill="#e3b341">  Brief description (0 to cancel): </tspan>Java programming revision</text>
+<text x="22" y="526"><tspan fill="#3fb950">  [OK]  Booking BK0013 submitted — awaiting approval.</tspan></text>
+<text x="22" y="545"></text>
+<text x="22" y="564"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

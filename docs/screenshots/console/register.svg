@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="610" height="1199" viewBox="0 0 610 1199" role="img" aria-label="Register a new account">
+<title>Register a new account</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="610" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="609" height="1198" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="305.0" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Register a new account</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">+============================================================+</tspan></text>
+<text x="22" y="89"><tspan fill="#39c5cf" font-weight="bold">|             UTAR SMART CAMPUS FACILITY SYSTEM              |</tspan></text>
+<text x="22" y="108"><tspan fill="#39c5cf" font-weight="bold">+============================================================+</tspan></text>
+<text x="22" y="127"></text>
+<text x="22" y="146"><tspan fill="#39c5cf">  [i]   Universiti Tunku Abdul Rahman — Sungai Long Campus</tspan></text>
+<text x="22" y="165"></text>
+<text x="22" y="184">  <tspan fill="#e3b341">[1]</tspan> Login</text>
+<text x="22" y="203">  <tspan fill="#e3b341">[2]</tspan> Register as New User</text>
+<text x="22" y="222">  <tspan fill="#e3b341">[0]</tspan> Exit</text>
+<text x="22" y="241"></text>
+<text x="22" y="260"><tspan fill="#e3b341">  Select option (0-2): </tspan>2</text>
+<text x="22" y="279"></text>
+<text x="22" y="298"><tspan fill="#39c5cf" font-weight="bold">--- NEW USER REGISTRATION -----------------------------</tspan></text>
+<text x="22" y="317"></text>
+<text x="22" y="336">  [0] Cancel   [1] Student   [2] Staff</text>
+<text x="22" y="355"><tspan fill="#e3b341">  Select role (0-2): </tspan>1</text>
+<text x="22" y="374"></text>
+<text x="22" y="393"><tspan fill="#39c5cf">  [i]   Registering as Student (CampusUser)...</tspan></text>
+<text x="22" y="412"></text>
+<text x="22" y="431"><tspan fill="#e3b341">  Full Name (0 to cancel): </tspan>Ong Jia Hui</text>
+<text x="22" y="450"><tspan fill="#e3b341">  Email (must be @utar.edu.my): </tspan>ong.jh@utar.edu.my</text>
+<text x="22" y="469"><tspan fill="#e3b341">  Password (min 6 characters): </tspan>secret1</text>
+<text x="22" y="488"><tspan fill="#e3b341">  Contact Number (e.g. 012-3456789): </tspan>012-3456789</text>
+<text x="22" y="507"></text>
+<text x="22" y="526"><tspan fill="#39c5cf">  [i]   Select your Faculty:</tspan></text>
+<text x="22" y="545">  <tspan fill="#e3b341">[1]</tspan> Lee Kong Chian Faculty of Engineering and Science (LKC FES)</text>
+<text x="22" y="564">  <tspan fill="#e3b341">[2]</tspan> Faculty of Accountancy and Management (FAM)</text>
+<text x="22" y="583">  <tspan fill="#e3b341">[3]</tspan> Faculty of Creative Industries (FCI)</text>
+<text x="22" y="602">  <tspan fill="#e3b341">[4]</tspan> Faculty of Medicine and Health Sciences (FMHS)</text>
+<text x="22" y="621">  <tspan fill="#e3b341">[5]</tspan> Institute of Chinese Studies (ICS)</text>
+<text x="22" y="640">  <tspan fill="#e3b341">[6]</tspan> Centre for Foundation Studies (CFS)</text>
+<text x="22" y="659">  <tspan fill="#e3b341">[0]</tspan> Cancel</text>
+<text x="22" y="678"><tspan fill="#e3b341">  Select faculty (0-6): </tspan>1</text>
+<text x="22" y="697"></text>
+<text x="22" y="716"><tspan fill="#39c5cf">  [i]   Select your Programme:</tspan></text>
+<text x="22" y="735">  <tspan fill="#e3b341">[0]</tspan> Cancel</text>
+<text x="22" y="754">  <tspan fill="#e3b341">[1]</tspan> Biomedical Engineering</text>
+<text x="22" y="773">  <tspan fill="#e3b341">[2]</tspan> Chemical Engineering</text>
+<text x="22" y="792">  <tspan fill="#e3b341">[3]</tspan> Civil Engineering</text>
+<text x="22" y="811">  <tspan fill="#e3b341">[4]</tspan> Electrical and Electronic Engineering</text>
+<text x="22" y="830">  <tspan fill="#e3b341">[5]</tspan> Materials Engineering</text>
+<text x="22" y="849">  <tspan fill="#e3b341">[6]</tspan> Mechanical Engineering</text>
+<text x="22" y="868">  <tspan fill="#e3b341">[7]</tspan> Mechatronics Engineering</text>
+<text x="22" y="887">  <tspan fill="#e3b341">[8]</tspan> Software Engineering</text>
+<text x="22" y="906">  <tspan fill="#e3b341">[9]</tspan> Telecommunications Engineering</text>
+<text x="22" y="925">  <tspan fill="#e3b341">[10]</tspan> Actuarial Science</text>
+<text x="22" y="944">  <tspan fill="#e3b341">[11]</tspan> Applied Mathematics with Computing</text>
+<text x="22" y="963">  <tspan fill="#e3b341">[12]</tspan> Architecture</text>
+<text x="22" y="982">  <tspan fill="#e3b341">[13]</tspan> Financial Mathematics</text>
+<text x="22" y="1001">  <tspan fill="#e3b341">[14]</tspan> Physics</text>
+<text x="22" y="1020">  <tspan fill="#e3b341">[15]</tspan> Quantity Surveying</text>
+<text x="22" y="1039"><tspan fill="#e3b341">  Select programme (0-15): </tspan>3</text>
+<text x="22" y="1058"></text>
+<text x="22" y="1077"><tspan fill="#3fb950">  [OK]  Registration successful!</tspan></text>
+<text x="22" y="1096">  <tspan fill="#39c5cf">Your User ID:</tspan>    <tspan fill="#f0f6fc">STU017</tspan></text>
+<text x="22" y="1115">  <tspan fill="#39c5cf">Role:</tspan>            <tspan fill="#f0f6fc">Student</tspan></text>
+<text x="22" y="1134"><tspan fill="#39c5cf">  [i]   You can now login with your email and password.</tspan></text>
+<text x="22" y="1153"></text>
+<text x="22" y="1172"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

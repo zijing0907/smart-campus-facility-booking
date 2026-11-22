@@ -34,7 +34,7 @@ At UTAR Sungai Long, most facility bookings (lecture rooms, multipurpose halls, 
 
 **Original coursework (Feb 2026).** This began as a group project for **UECS1144 Object-Oriented Application Development** at Universiti Tunku Abdul Rahman (UTAR). I led a team of four. The brief asked for an object-oriented Java system that uses `.txt` files as its database, is seeded with at least 20 UTAR users, and comes with a requirements specification and a UML class diagram. We submitted a console application: about 5,000 lines of plain Java in 20 classes, with no frameworks or libraries. The code exactly as submitted is in commit [`c3b6cd7`](https://github.com/zijing0907/smart-campus-facility-booking/tree/c3b6cd7).
 
-**After submission.** I kept improving it. I added a Swing desktop interface on top of the same service layer, then weekly bookings, a timetable, notifications, an activity log, PDF reports, photo attachments, password hashing and login lock-out. I also fixed [7 bugs](#bugs-fixed-after-submission) in the original code. The console version is still included and follows the same rules. The project is now about 11,000 lines in 48 classes, still using only the JDK.
+**After submission.** I kept improving it. I added a Swing desktop interface on top of the same service layer, then weekly bookings, a timetable, notifications, an activity log, PDF reports, photo attachments, password hashing and login lock-out. I also fixed [8 bugs](#bugs-fixed-after-submission) in the original code. The console version is still included and follows the same rules. The project is now about 11,000 lines in 48 classes, still using only the JDK.
 
 ## Features
 
@@ -70,7 +70,7 @@ The desktop app has every feature above. The console app has the original menus 
 
 ## Screenshots
 
-These are taken from the running desktop app. A sample exported report is in [`docs/sample-report.pdf`](docs/sample-report.pdf).
+These are taken from the running desktop app. Every screen of the [console version](#console-version-the-original-coursework) is shown after them. A sample exported report is in [`docs/sample-report.pdf`](docs/sample-report.pdf).
 
 ### Students and staff
 
@@ -123,23 +123,101 @@ These are taken from the running desktop app. A sample exported report is in [`d
 </tr>
 </table>
 
+### Console version (the original coursework)
+
+The terminal app has one menu per role. These are all of its screens, captured from one session on the demo data. The numbers are the menu options. Click a group to open it.
+
 <details>
-<summary><b>Console version (the original coursework)</b></summary>
+<summary><b>Login and registration</b> (2 screens)</summary>
 <br>
-<p align="center">
-  <img src="docs/screenshots/console/user-portal.svg" alt="Student and staff portal menu" width="49%">
-  <img src="docs/screenshots/console/admin-panel.svg" alt="Admin panel menu" width="49%">
-</p>
-<p align="center">
-  <img src="docs/screenshots/console/login.svg" alt="Login screen" width="49%">
-  <img src="docs/screenshots/console/maintenance-summary.svg" alt="Maintenance summary report" width="49%">
-</p>
-<p align="center">
-  <img src="docs/screenshots/console/search.svg" alt="Searching for free computer labs" width="80%">
-</p>
-<p align="center">
-  <img src="docs/screenshots/console/peak-hours.svg" alt="Peak booking hours report" width="60%">
-</p>
+
+<table>
+<tr>
+<td width="50%" valign="top"><b>Register a new student account</b><br><img src="docs/screenshots/console/register.svg" alt="Register a new student account"></td>
+<td width="50%" valign="top"><b>Log in</b><br><img src="docs/screenshots/console/login.svg" alt="Log in"></td>
+</tr>
+</table>
+</details>
+
+<details>
+<summary><b>Students and staff</b> (10 screens)</summary>
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top"><b>Main menu, with new notifications</b><br><img src="docs/screenshots/console/user-portal.svg" alt="Main menu, with new notifications"></td>
+<td width="50%" valign="top"><b>1 · Search for free computer labs</b><br><img src="docs/screenshots/console/search.svg" alt="Search for free computer labs"></td>
+</tr>
+<tr>
+<td valign="top"><b>2 · Book a facility for 35 people</b><br><img src="docs/screenshots/console/book.svg" alt="Book a facility for 35 people"></td>
+<td valign="top"><b>3 · My bookings</b><br><img src="docs/screenshots/console/my-bookings.svg" alt="My bookings"></td>
+</tr>
+<tr>
+<td valign="top"><b>4 · Change a pending booking</b><br><img src="docs/screenshots/console/modify-booking.svg" alt="Change a pending booking"></td>
+<td valign="top"><b>5 · Cancel a booking</b><br><img src="docs/screenshots/console/cancel-booking.svg" alt="Cancel a booking"></td>
+</tr>
+<tr>
+<td valign="top"><b>6 · Report an issue with a photo</b><br><img src="docs/screenshots/console/report-issue.svg" alt="Report an issue with a photo"></td>
+<td valign="top"><b>7 · Booking history and stats</b><br><img src="docs/screenshots/console/history-stats.svg" alt="Booking history and stats"></td>
+</tr>
+<tr>
+<td valign="top"><b>8 · Update my profile</b><br><img src="docs/screenshots/console/profile.svg" alt="Update my profile"></td>
+<td valign="top"><b>9 · Change password</b><br><img src="docs/screenshots/console/change-password.svg" alt="Change password"></td>
+</tr>
+</table>
+</details>
+
+<details>
+<summary><b>Admin</b> (13 screens)</summary>
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top"><b>Main menu, with new notifications</b><br><img src="docs/screenshots/console/admin-panel.svg" alt="Main menu, with new notifications"></td>
+<td width="50%" valign="top"><b>1 · Approve or reject bookings</b><br><img src="docs/screenshots/console/process-bookings.svg" alt="Approve or reject bookings"></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><b>2 · All bookings</b><br><img src="docs/screenshots/console/all-bookings.svg" alt="All bookings"></td>
+</tr>
+<tr>
+<td valign="top"><b>3 · Close a facility for maintenance</b><br><img src="docs/screenshots/console/facility-status.svg" alt="Close a facility for maintenance"></td>
+<td valign="top"><b>4 · Maintenance reports</b><br><img src="docs/screenshots/console/maintenance-reports.svg" alt="Maintenance reports"></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><b>5 · Assign a repair</b><br><img src="docs/screenshots/console/assign-task.svg" alt="Assign a repair"></td>
+</tr>
+<tr>
+<td valign="top"><b>6 · Facility utilization report</b><br><img src="docs/screenshots/console/utilization.svg" alt="Facility utilization report"></td>
+<td valign="top"><b>7 · Peak booking hours</b><br><img src="docs/screenshots/console/peak-hours.svg" alt="Peak booking hours"></td>
+</tr>
+<tr>
+<td valign="top"><b>8 · Bookings by facility type</b><br><img src="docs/screenshots/console/type-usage.svg" alt="Bookings by facility type"></td>
+<td valign="top"><b>9 · Maintenance summary</b><br><img src="docs/screenshots/console/maintenance-summary.svg" alt="Maintenance summary"></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><b>10 · All users</b><br><img src="docs/screenshots/console/users.svg" alt="All users"></td>
+</tr>
+<tr>
+<td valign="top"><b>11 · Send booking reminders</b><br><img src="docs/screenshots/console/reminders.svg" alt="Send booking reminders"></td>
+<td valign="top"><b>12 · Maintenance schedule</b><br><img src="docs/screenshots/console/schedule.svg" alt="Maintenance schedule"></td>
+</tr>
+</table>
+</details>
+
+<details>
+<summary><b>Maintenance staff</b> (4 screens)</summary>
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top"><b>Main menu, with a new task</b><br><img src="docs/screenshots/console/maintenance-panel.svg" alt="Main menu, with a new task"></td>
+<td width="50%" valign="top"><b>1 · My assigned tasks</b><br><img src="docs/screenshots/console/maintenance-tasks.svg" alt="My assigned tasks"></td>
+</tr>
+<tr>
+<td valign="top"><b>2 · Mark a task resolved</b><br><img src="docs/screenshots/console/maintenance-update.svg" alt="Mark a task resolved"></td>
+<td valign="top"><b>3 · Completed tasks</b><br><img src="docs/screenshots/console/maintenance-completed.svg" alt="Completed tasks"></td>
+</tr>
+</table>
 </details>
 
 ## Booking rules
@@ -283,3 +361,4 @@ docs/                  screenshots and a sample PDF report
 - **Reminders used up for other users.** The login reminder showed every user's upcoming bookings, not just your own, and marked them all as sent.
 - **Bookings in the past.** Any date in the current year was accepted, including days that had already gone.
 - **Crash when changing a booking.** Typing a time such as `10am` in the console's Modify Booking crashed the program, because the new times were never checked.
+- **Reminders for bookings that had already happened.** The admin's Send Booking Reminders screen said it listed upcoming bookings, but it counted every approved booking, so users could be reminded about bookings from months ago.

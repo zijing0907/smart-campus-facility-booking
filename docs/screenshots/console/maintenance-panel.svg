@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="783" height="382" viewBox="0 0 783 382" role="img" aria-label="Maintenance panel with a new task">
+<title>Maintenance panel with a new task</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="783" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="782" height="381" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="391.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Maintenance panel with a new task</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">+============================================================+</tspan></text>
+<text x="22" y="89"><tspan fill="#39c5cf" font-weight="bold">|           UTAR SMART CAMPUS — MAINTENANCE PANEL            |</tspan></text>
+<text x="22" y="108"><tspan fill="#39c5cf" font-weight="bold">+============================================================+</tspan></text>
+<text x="22" y="127"></text>
+<text x="22" y="146">  <tspan fill="#39c5cf">Personnel:</tspan>       <tspan fill="#f0f6fc">Demo Maintenance</tspan></text>
+<text x="22" y="165">  <tspan fill="#39c5cf">Specialization:</tspan>  <tspan fill="#f0f6fc">General</tspan></text>
+<text x="22" y="184"></text>
+<text x="22" y="203"><tspan fill="#f85149" font-weight="bold">  [!!!] NEW: New task MR0004 at Lecture Room K402: Projector flickers during lectures</tspan></text>
+<text x="22" y="222"></text>
+<text x="22" y="241"><tspan fill="#39c5cf" font-weight="bold">--- MY TASKS ------------------------------------------</tspan></text>
+<text x="22" y="260">  <tspan fill="#e3b341">[1]</tspan> View My Assigned Tasks</text>
+<text x="22" y="279">  <tspan fill="#e3b341">[2]</tspan> Update Task Status</text>
+<text x="22" y="298">  <tspan fill="#e3b341">[3]</tspan> View My Completed Tasks</text>
+<text x="22" y="317">  <tspan fill="#e3b341">[0]</tspan> Logout</text>
+<text x="22" y="336"></text>
+<text x="22" y="355"><tspan fill="#e3b341">  Select option (0-3): </tspan>1</text>
+</g>
+</svg>
