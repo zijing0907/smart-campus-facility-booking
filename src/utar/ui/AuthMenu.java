@@ -98,13 +98,24 @@ public class AuthMenu {
         }
 
         // ── Verify with UserService ─────────────────────────────────────────
-        User u = userService.login(email, pass);
+        User u;
+        try {
+            u = userService.login(email, pass);
+        } catch (IllegalStateException locked) {
+            // Too many wrong passwords in a row — the message says until when
+            ConsoleUI.printError(locked.getMessage());
+            ConsoleUI.pressEnter(sc);
+            return null;
+        }
         if (u == null) {
             // null can mean two things — we check which one to give a clearer message
-            if (!userService.emailExists(email))
+            if (!userService.emailExists(email)) {
                 ConsoleUI.printError("Invalid email. No account found with this email.");
-            else
-                ConsoleUI.printError("Invalid password. Please try again.");
+            } else {
+                int left = userService.attemptsLeft(email);
+                ConsoleUI.printError("Invalid password. " + left + (left == 1 ? " attempt" : " attempts")
+                        + " left before the account is locked for " + UserService.LOCK_MINUTES + " minutes.");
+            }
             ConsoleUI.pressEnter(sc);
             return null;
         }

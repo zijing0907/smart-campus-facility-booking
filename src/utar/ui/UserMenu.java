@@ -3,6 +3,7 @@ package utar.ui;
 import utar.model.*;
 import utar.service.*;
 import utar.util.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,6 +37,7 @@ public class UserMenu {
     private Scanner            sc;                   // shared keyboard input
     private User               currentUser;          // who is logged in
     private BookingService     bookingService   = new BookingService();
+    private NotificationService notifier        = new NotificationService();
     private MaintenanceService maintService     = new MaintenanceService();
     private AnalyticsService   analyticsService = new AnalyticsService();
     private UserService        userService      = new UserService();
@@ -64,6 +66,7 @@ public class UserMenu {
 
             // Show reminder notifications for bookings starting soon
             checkAndShowReminders();
+            showNotifications(currentUser.getUserId());
 
             ConsoleUI.printSection("FACILITY BOOKING");
             ConsoleUI.printMenuItem(1, "Search Available Facilities");
@@ -105,6 +108,17 @@ public class UserMenu {
     }
 
     /**
+     * showNotifications — print any notifications this user hasn't seen
+     * yet (e.g. "Your booking BK0100 was approved"), then mark them as read.
+     */
+    private void showNotifications(String userId) {
+        for (Notification n : notifier.getUnread(userId)) {
+            ConsoleUI.printAlert("NEW: " + n.getMessage());
+        }
+        notifier.markAllRead(userId);
+    }
+
+    /**
      * checkAndShowReminders — runs at the top of every menu refresh.
      * Asks BookingService for any approved bookings starting within the
      * next 2 hours and displays them.  Each booking's reminderSent flag
@@ -116,7 +130,8 @@ public class UserMenu {
             .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String now = java.time.LocalTime.now()
             .format(java.time.format.DateTimeFormatter.ofPattern("HH:mm"));
-        ArrayList<Booking> due = bookingService.getDueReminders(today, now);
+        ArrayList<Booking> due = bookingService.getDueReminders(
+                currentUser.getUserId(), today, now);
         for (Booking b : due) {
             Facility f = ds.getFacilityById(b.getFacilityId());
             ConsoleUI.printAlert("REMINDER: " + (f != null ? f.getName() : b.getFacilityId())
@@ -144,9 +159,14 @@ public class UserMenu {
         while (true) {
             date = ConsoleUI.prompt(sc, "Date (dd/MM/yyyy) — 0 to cancel");
             if (date.equals("0")) return;
-            if (InputValidator.isValidDate(date)) break;
-            ConsoleUI.printError("Invalid date. Use a real dd/MM/yyyy date in "
-                    + InputValidator.currentYear() + " or " + InputValidator.maxBookingYear() + ".");
+            if (!InputValidator.isValidDate(date)) {
+                ConsoleUI.printError("Invalid date. Use a real dd/MM/yyyy date in "
+                        + InputValidator.currentYear() + " or " + InputValidator.maxBookingYear() + ".");
+            } else if (InputValidator.isPastDate(date)) {
+                ConsoleUI.printError("That date has already passed. Enter today or a later date.");
+            } else {
+                break;
+            }
         }
 
         // Start time prompt with retry loop
@@ -174,6 +194,11 @@ public class UserMenu {
             }
             break;
         }
+        if (InputValidator.hasStarted(date, start)) {
+            ConsoleUI.printError(BookingService.PAST_SLOT_MESSAGE);
+            ConsoleUI.pressEnter(sc);
+            return;
+        }
         if (!InputValidator.isWithinOperatingHours(start, end))
             ConsoleUI.printWarning("Note: Operating hours are 08:00 – 22:00.");
 
@@ -183,8 +208,9 @@ public class UserMenu {
         int t = ConsoleUI.promptInt(sc, "Filter by type", 0, 5);
         Facility.FacilityType type = null;
         if (t > 0) type = Facility.FacilityType.values()[t - 1];
+        int people = ConsoleUI.promptInt(sc, "Number of people (0 = any size)", 0, 1000);
 
-        ArrayList<Facility> results = bookingService.searchAvailable(date, start, end, type);
+        ArrayList<Facility> results = bookingService.searchAvailable(date, start, end, type, people);
         System.out.println();
         if (results.isEmpty()) {
             ConsoleUI.printWarning("No facilities available for selected criteria.");
@@ -222,9 +248,14 @@ public class UserMenu {
         while (true) {
             date = ConsoleUI.prompt(sc, "Date (dd/MM/yyyy) — 0 to cancel");
             if (date.equals("0")) return;
-            if (InputValidator.isValidDate(date)) break;
-            ConsoleUI.printError("Invalid date. Use a real dd/MM/yyyy date in "
-                    + InputValidator.currentYear() + " or " + InputValidator.maxBookingYear() + ".");
+            if (!InputValidator.isValidDate(date)) {
+                ConsoleUI.printError("Invalid date. Use a real dd/MM/yyyy date in "
+                        + InputValidator.currentYear() + " or " + InputValidator.maxBookingYear() + ".");
+            } else if (InputValidator.isPastDate(date)) {
+                ConsoleUI.printError("That date has already passed. Enter today or a later date.");
+            } else {
+                break;
+            }
         }
 
         ConsoleUI.printInfo("Use 24-hour time, e.g. 14:00 for 2pm.");
@@ -259,9 +290,17 @@ public class UserMenu {
             break;
         }
 
-        ArrayList<Facility> available = bookingService.searchAvailable(date, start, end, null);
+        if (InputValidator.hasStarted(date, start)) {
+            ConsoleUI.printError(BookingService.PAST_SLOT_MESSAGE);
+            ConsoleUI.pressEnter(sc); return;
+        }
+
+        int people = ConsoleUI.promptInt(sc, "Number of people attending", 1, 1000);
+
+        // only facilities that are free AND big enough
+        ArrayList<Facility> available = bookingService.searchAvailable(date, start, end, null, people);
         if (available.isEmpty()) {
-            ConsoleUI.printWarning("No facilities available for that slot.");
+            ConsoleUI.printWarning("No facilities big enough are available for that slot.");
             ConsoleUI.pressEnter(sc); return;
         }
 
@@ -293,7 +332,7 @@ public class UserMenu {
 
         try {
             Booking b = bookingService.createBooking(currentUser.getUserId(),
-                    chosen.getFacilityId(), date, start, end, purpose, desc);
+                    chosen.getFacilityId(), date, start, end, purpose, desc, people);
             ConsoleUI.printSuccess("Booking " + b.getBookingId() + " submitted — awaiting approval.");
         } catch (Exception e) {
             ConsoleUI.printError(e.getMessage());
@@ -328,8 +367,9 @@ public class UserMenu {
                     f != null ? f.getName() : b.getFacilityId(),
                     statusColor, b.getStatus(), ConsoleUI.RESET,
                     b.getDate(), b.getStartTime(), b.getEndTime());
-            System.out.printf("           Purpose: %-15s  %s%n",
-                    b.getPurpose(), b.getDescription());
+            System.out.printf("           Purpose: %-15s  People: %-5s %s%n",
+                    b.getPurpose(), b.getAttendees() > 0 ? String.valueOf(b.getAttendees()) : "-",
+                    b.getDescription());
             if (b.getAdminRemark() != null)
                 System.out.printf("           Remark: %s%n", b.getAdminRemark());
             ConsoleUI.printDivider();
@@ -390,6 +430,12 @@ public class UserMenu {
         String newEnd = ConsoleUI.prompt(sc, "New end time [" + target.getEndTime() + "]");
         if (newEnd.isBlank()) newEnd = target.getEndTime();
 
+        if (!InputValidator.isValidTime(newStart) || !InputValidator.isValidTime(newEnd)) {
+            ConsoleUI.printError("Invalid time. Use HH:mm (e.g. 09:00)."); ConsoleUI.pressEnter(sc); return;
+        }
+        if (InputValidator.hasStarted(newDate, newStart)) {
+            ConsoleUI.printError(BookingService.PAST_SLOT_MESSAGE); ConsoleUI.pressEnter(sc); return;
+        }
         if (!InputValidator.isValidTimeRange(newStart, newEnd)
                 || !InputValidator.hasMinimumDuration(newStart, newEnd)
                 || !InputValidator.isWithinOperatingHours(newStart, newEnd)) {
@@ -399,11 +445,28 @@ public class UserMenu {
         String newDesc = ConsoleUI.prompt(sc, "New description [" + target.getDescription() + "]");
         if (newDesc.isBlank()) newDesc = target.getDescription();
 
+        // Number of people — ENTER keeps the current number
+        String peopleText = ConsoleUI.prompt(sc, "New number of people ["
+                + (target.getAttendees() > 0 ? target.getAttendees() : "-") + "]");
+        int newPeople = 0;   // 0 = keep
+        if (!peopleText.isBlank()) {
+            try {
+                newPeople = Integer.parseInt(peopleText);
+            } catch (NumberFormatException e) {
+                newPeople = -1;
+            }
+            if (newPeople < 1) {
+                ConsoleUI.printError("Number of people must be a whole number, at least 1.");
+                ConsoleUI.pressEnter(sc); return;
+            }
+        }
+
         // Check if anything actually changed
         boolean changed = !newDate.equals(target.getDate())
                        || !newStart.equals(target.getStartTime())
                        || !newEnd.equals(target.getEndTime())
-                       || !newDesc.equals(target.getDescription());
+                       || !newDesc.equals(target.getDescription())
+                       || (newPeople > 0 && newPeople != target.getAttendees());
 
         if (!changed) {
             ConsoleUI.printInfo("No changes made.");
@@ -413,7 +476,7 @@ public class UserMenu {
 
         try {
             bookingService.modifyBooking(target.getBookingId(), currentUser.getUserId(),
-                    newDate, newStart, newEnd, newDesc);
+                    newDate, newStart, newEnd, newDesc, newPeople);
             ConsoleUI.printSuccess("Booking updated successfully.");
         } catch (Exception e) {
             ConsoleUI.printError(e.getMessage());
@@ -520,10 +583,29 @@ public class UserMenu {
             ConsoleUI.printError("Invalid date."); ConsoleUI.pressEnter(sc); return;
         }
 
+        // Optional photo or PDF: the user types or pastes the file's full path
+        File attachment = null;
+        while (true) {
+            String path = ConsoleUI.prompt(sc, "Attach a photo or PDF (full file path, ENTER to skip)");
+            // Windows "Copy as path" puts quotes around the path, so remove them
+            if (path.length() >= 2 && path.startsWith("\"") && path.endsWith("\"")) {
+                path = path.substring(1, path.length() - 1);
+            }
+            if (path.isBlank()) break;
+            try {
+                MaintenanceService.checkAttachment(new File(path));   // type, size, contents
+                attachment = new File(path);
+                break;
+            } catch (IllegalArgumentException e) {
+                ConsoleUI.printError(e.getMessage() + " Try another file or press ENTER to skip.");
+            }
+        }
+
         try {
             MaintenanceReport r = maintService.reportIssue(chosen.getFacilityId(),
-                    currentUser.getUserId(), desc, category, date);
-            ConsoleUI.printSuccess("Report " + r.getReportId() + " submitted successfully.");
+                    currentUser.getUserId(), desc, category, date, attachment);
+            ConsoleUI.printSuccess("Report " + r.getReportId() + " submitted successfully"
+                    + (r.hasAttachment() ? " with your attachment." : "."));
         } catch (Exception e) {
             ConsoleUI.printError(e.getMessage());
         }
@@ -621,7 +703,7 @@ public class UserMenu {
         String oldPass = ConsoleUI.prompt(sc, "Current password");
 
         // Verify current password FIRST — no point asking for new password if old is wrong
-        if (!currentUser.getPassword().equals(oldPass)) {
+        if (!userService.checkPassword(currentUser.getUserId(), oldPass)) {
             ConsoleUI.printError("Current password is incorrect.");
             ConsoleUI.pressEnter(sc); return;
         }

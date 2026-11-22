@@ -1,7 +1,10 @@
 package utar.service;
 
 import utar.model.*;
+import utar.util.PasswordHasher;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 /**
@@ -46,6 +49,9 @@ public class DataStore {
     private static final String FACILITY_FILE = DATA_DIR + "/facilities.txt";
     private static final String BOOKING_FILE = DATA_DIR + "/bookings.txt";
     private static final String REPORT_FILE = DATA_DIR + "/reports.txt";
+    private static final String ATTACHMENT_DIR = DATA_DIR + "/attachments";   // photos / PDFs sent with reports
+    private static final String NOTIFICATION_FILE = DATA_DIR + "/notifications.txt";
+    private static final String LOG_FILE = DATA_DIR + "/activity-log.txt";       // only ever appended to
 
     // ── In-memory storage (ArrayLists) ─────────────────────────────────
     // These four lists are the program's "database" while it is running.
@@ -54,6 +60,8 @@ public class DataStore {
     private ArrayList<Facility> facilities = new ArrayList<>();
     private ArrayList<Booking> bookings  = new ArrayList<>();
     private ArrayList<MaintenanceReport> reports = new ArrayList<>();
+    private ArrayList<Notification> notifications = new ArrayList<>();
+    private ArrayList<LogEntry> activityLog = new ArrayList<>();
 
     // ── ID counters ──────────────────────────────────────────────────────────
     // Used by nextStudentId(), nextStaffId(), etc. to make sure each new
@@ -63,6 +71,7 @@ public class DataStore {
     private int maintenanceCounter = 1;
     private int bookingCounter = 1;
     private int reportCounter = 1;
+    private int notificationCounter = 1;
 
     /**
      * Static list of UTAR Sungai Long faculties.
@@ -152,14 +161,38 @@ public class DataStore {
         new File(DATA_DIR).mkdirs();   // create the data folder if missing
 
         if (new File(USERS_FILE).exists()) {
-            // Existing data — reload everything from .txt files
+            // Existing data — reload everything from .txt files.
+            // Files saved by older versions still have plain-text passwords:
+            // swap them for hashes and save straight away.
             loadAll();
+            if (hashPlainTextPasswords()) {
+                saveAll();
+            }
         }
         else {
             // First-time run — populate with sample data and save it
+            // (the seed accounts are written with hashed passwords)
             seedData();
+            hashPlainTextPasswords();
             saveAll();
         }
+    }
+
+    /**
+     * hashPlainTextPasswords — replace any password that isn't a hash yet
+     * with its salted hash (see PasswordHasher), so users.txt never keeps
+     * a readable password.  Users can still log in with the same password.
+     * @return true if at least one password was changed
+     */
+    private boolean hashPlainTextPasswords() {
+        boolean changed = false;
+        for (User u : users) {
+            if (!PasswordHasher.isHashed(u.getPassword())) {
+                u.setPassword(PasswordHasher.hash(u.getPassword()));
+                changed = true;
+            }
+        }
+        return changed;
     }
 
     /**
@@ -306,6 +339,7 @@ public class DataStore {
         saveFacilities();
         saveBookings();
         saveReports();
+        saveNotifications();
     }
 
     /**
@@ -323,7 +357,7 @@ public class DataStore {
     private void saveUsers() {
         ArrayList<String> lines = new ArrayList<>();
         // Header row — starts with '#' so readLines() skips it on load
-        lines.add("# userId|name|email|password|contact|faculty|role|extra");
+        lines.add("# userId|name|email|passwordHash|contact|faculty|role|extra|failedLogins|lockedUntil");
 
         for (User u : users) {
             // Pick the correct value to put in the 'extra' column
@@ -337,7 +371,9 @@ public class DataStore {
             // Admin has no extra — leave it as ""
 
             // Build the pipe-delimited line in one go
-            lines.add(String.join("|", safe(u.getUserId()), safe(u.getName()), safe(u.getEmail()), safe(u.getPassword()), safe(u.getContactNumber()), safe(u.getFaculty()), u.getRole().name(), safe(extra)));
+            lines.add(String.join("|", safe(u.getUserId()), safe(u.getName()), safe(u.getEmail()), safe(u.getPassword()), safe(u.getContactNumber()), safe(u.getFaculty()), u.getRole().name(), safe(extra),
+                    String.valueOf(u.getFailedLogins()),
+                    u.getLockedUntil() == null ? "NULL" : u.getLockedUntil().toString()));
         }
 
         writeLine(USERS_FILE, lines);
@@ -354,12 +390,23 @@ public class DataStore {
         writeLine(FACILITY_FILE, lines);
     }
 
+    private void saveNotifications() {
+        ArrayList<String> lines = new ArrayList<>();
+        lines.add("# notificationId|userId|createdAt|message|read");
+        for (Notification n : notifications) {
+            lines.add(String.join("|", safe(n.getNotificationId()), safe(n.getUserId()),
+                    safe(n.getCreatedAt()), safe(n.getMessage()), String.valueOf(n.isRead())));
+        }
+        writeLine(NOTIFICATION_FILE, lines);
+    }
+
     private void saveBookings() {
         ArrayList<String> lines = new ArrayList<>();
-        lines.add("# bookingId|userId|facilityId|date|start|end|purpose|desc|status|remark|reminderSent");
+        lines.add("# bookingId|userId|facilityId|date|start|end|purpose|desc|status|remark|reminderSent|attendees|seriesId");
 
         for (Booking b : bookings) {
-            lines.add(String.join("|", safe(b.getBookingId()), safe(b.getUserId()), safe(b.getFacilityId()), safe(b.getDate()), safe(b.getStartTime()), safe(b.getEndTime()), b.getPurpose().name(), safe(b.getDescription()), b.getStatus().name(), safe(b.getAdminRemark()), String.valueOf(b.isReminderSent())));
+            lines.add(String.join("|", safe(b.getBookingId()), safe(b.getUserId()), safe(b.getFacilityId()), safe(b.getDate()), safe(b.getStartTime()), safe(b.getEndTime()), b.getPurpose().name(), safe(b.getDescription()), b.getStatus().name(), safe(b.getAdminRemark()), String.valueOf(b.isReminderSent()),
+                    String.valueOf(b.getAttendees()), safe(b.getSeriesId())));
         }
 
         writeLine(BOOKING_FILE, lines);
@@ -367,10 +414,10 @@ public class DataStore {
 
     private void saveReports() {
         ArrayList<String> lines = new ArrayList<>();
-        lines.add("# reportId|facilityId|reportedBy|desc|category|status|assignedTo|reportedDate|resolvedDate|notes");
+        lines.add("# reportId|facilityId|reportedBy|desc|category|status|assignedTo|reportedDate|resolvedDate|notes|attachment");
 
         for (MaintenanceReport r : reports) {
-            lines.add(String.join("|", safe(r.getReportId()), safe(r.getFacilityId()), safe(r.getReportedByUserId()), safe(r.getIssueDescription()), r.getCategory().name(), r.getStatus().name(), safe(r.getAssignedTo()), safe(r.getReportedDate()), safe(r.getResolvedDate()), safe(r.getResolutionNotes())));
+            lines.add(String.join("|", safe(r.getReportId()), safe(r.getFacilityId()), safe(r.getReportedByUserId()), safe(r.getIssueDescription()), r.getCategory().name(), r.getStatus().name(), safe(r.getAssignedTo()), safe(r.getReportedDate()), safe(r.getResolvedDate()), safe(r.getResolutionNotes()), safe(r.getAttachment())));
         }
 
         writeLine(REPORT_FILE, lines);
@@ -389,6 +436,54 @@ public class DataStore {
         loadFacilities();
         loadBookings();
         loadReports();
+        loadNotifications();
+        loadActivityLog();
+    }
+
+    /**
+     * loadNotifications — read notifications.txt (missing in data folders
+     * made by older versions, which simply means "no notifications").
+     * Columns: id | userId | createdAt | message | read
+     */
+    private void loadNotifications() {
+        notifications.clear();
+        for (String line : readLines(NOTIFICATION_FILE)) {
+            String[] p = splitByPipe(line);
+            if (p.length < 5) {
+                continue;
+            }
+            try {
+                Notification n = new Notification(load(p[0]), load(p[1]), load(p[2]), load(p[3]),
+                                                  Boolean.parseBoolean(p[4]));
+                notifications.add(n);
+                int number = Integer.parseInt(n.getNotificationId().substring(2));   // "NT0007" -> 7
+                if (number >= notificationCounter) {
+                    notificationCounter = number + 1;
+                }
+            } catch (Exception e) {
+                System.err.println("Bad notification line: " + line);
+            }
+        }
+    }
+
+    /**
+     * loadActivityLog — read activity-log.txt.
+     * Columns: time | userId | action | details
+     */
+    private void loadActivityLog() {
+        activityLog.clear();
+        for (String line : readLines(LOG_FILE)) {
+            String[] p = splitByPipe(line);
+            if (p.length < 4) {
+                continue;
+            }
+            try {
+                activityLog.add(new LogEntry(load(p[0]), load(p[1]),
+                        LogEntry.Action.valueOf(p[2]), load(p[3])));
+            } catch (Exception e) {
+                System.err.println("Bad activity log line: " + line);
+            }
+        }
     }
 
     /**
@@ -469,6 +564,15 @@ public class DataStore {
                 } else {
                     users.add(new Admin(id, name, email, pass, contact));
                 }
+
+                // Columns 9-10 (login lock-out) were added later; older files don't have them
+                if (p.length > 9) {
+                    User added = users.get(users.size() - 1);
+                    added.setFailedLogins(Integer.parseInt(p[8]));
+                    if (!"NULL".equals(p[9])) {
+                        added.setLockedUntil(java.time.LocalDateTime.parse(p[9]));
+                    }
+                }
             } catch (Exception e) {
                 System.err.println("Bad user line: " + line);
             }
@@ -537,6 +641,12 @@ public class DataStore {
                 b.setStatus(Booking.BookingStatus.valueOf(p[8]));
                 b.setAdminRemark(load(p[9]));
                 b.setReminderSent(Boolean.parseBoolean(p[10]));
+
+                // Columns 12-13 (attendees, weekly series) were added later; older files don't have them
+                if (p.length > 12) {
+                    b.setAttendees(Integer.parseInt(p[11]));
+                    b.setSeriesId(load(p[12]));
+                }
                 bookings.add(b);
 
                 // Bump the booking counter past any existing BKxxxx ID
@@ -562,8 +672,8 @@ public class DataStore {
      *   reportId | facilityId | reportedBy | description | category |
      *   status   | assignedTo | reportedDate | resolvedDate | notes
      * Note: assignedTo / resolvedDate / notes may all be "NULL" for reports
-     * that have not yet been assigned or resolved. We only restore those
-     * fields when assignedTo is non-NULL.
+     * that have not yet been assigned or resolved; load() turns "NULL"
+     * back into a real null.
      */
     private void loadReports() {
         reports.clear();
@@ -582,26 +692,35 @@ public class DataStore {
                         MaintenanceReport.IssueCategory.valueOf(p[4]),
                         load(p[7]));
 
-                // Apply the saved status (constructor default is REPORTED)
-                r.setStatus(MaintenanceReport.ReportStatus.valueOf(p[5]));
-
-                // The "assigned" parts are only meaningful if assignedTo is set
+                // Restore the assignee FIRST: setAssignedTo() also moves the
+                // status to ASSIGNED, so doing it after setStatus() would turn
+                // every IN_PROGRESS or RESOLVED report back into ASSIGNED.
                 if (!"NULL".equals(p[6])) {
                     r.setAssignedTo(load(p[6]));
-                    r.setResolvedDate(load(p[8]));
-                    r.setResolutionNotes(load(p[9]));
-                    reports.add(r);
+                }
 
-                    // Bump the report counter past any existing MRxxxx ID
-                    if (load(p[0]).startsWith("MR")) {
-                        try {
-                            int n = Integer.parseInt(load(p[0]).substring(2));
-                            if (n >= reportCounter) {
-                                reportCounter = n + 1;
-                            }
-                        } catch (Exception ignored) {
-                            // not a numeric MR id — skip
+                // Apply the saved status (constructor default is REPORTED)
+                r.setStatus(MaintenanceReport.ReportStatus.valueOf(p[5]));
+                r.setResolvedDate(load(p[8]));
+                r.setResolutionNotes(load(p[9]));
+
+                // Column 11 (attachment) was added later; older files don't have it
+                if (p.length > 10) {
+                    r.setAttachment(load(p[10]));
+                }
+
+                // Every report is kept, including ones not assigned yet
+                reports.add(r);
+
+                // Bump the report counter past any existing MRxxxx ID
+                if (load(p[0]).startsWith("MR")) {
+                    try {
+                        int n = Integer.parseInt(load(p[0]).substring(2));
+                        if (n >= reportCounter) {
+                            reportCounter = n + 1;
                         }
+                    } catch (Exception ignored) {
+                        // not a numeric MR id — skip
                     }
                 }
             } catch (Exception e) {
@@ -629,6 +748,47 @@ public class DataStore {
     }
     public String nextReportId() {
         return String.format("MR%04d", reportCounter++);
+    }
+    public String nextNotificationId() {
+        return String.format("NT%04d", notificationCounter++);
+    }
+
+    /**
+     * nextSeriesId — one more than the highest RSxxxx series number used by
+     * any booking, e.g. "RS0003".  Worked out from the bookings themselves.
+     */
+    public String nextSeriesId() {
+        int highest = 0;
+        for (Booking b : bookings) {
+            String id = b.getSeriesId();
+            if (id != null && id.startsWith("RS")) {
+                try {
+                    highest = Math.max(highest, Integer.parseInt(id.substring(2)));
+                } catch (NumberFormatException ignored) {
+                    // not a numeric RSxxxx id — skip
+                }
+            }
+        }
+        return String.format("RS%04d", highest + 1);
+    }
+
+    /**
+     * nextFacilityId — one more than the highest Fxxx number in use, e.g. "F103".
+     * Worked out from the list itself, so it's right after loading or seeding.
+     */
+    public String nextFacilityId() {
+        int highest = 0;
+        for (Facility f : facilities) {
+            String id = f.getFacilityId();
+            if (id.startsWith("F")) {
+                try {
+                    highest = Math.max(highest, Integer.parseInt(id.substring(1)));
+                } catch (NumberFormatException ignored) {
+                    // not a numeric Fxxx id — skip
+                }
+            }
+        }
+        return String.format("F%03d", highest + 1);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -767,6 +927,30 @@ public class DataStore {
     //  CRUD — Maintenance Reports
     // ─────────────────────────────────────────────────────────────────────────
 
+    /**
+     * saveAttachment — copy a file the user picked into data/attachments,
+     * named after the report (e.g. "MR0007.jpg").  Using the report ID as
+     * the name means two uploads can never overwrite each other, and the
+     * user can move or delete their original file afterwards.
+     * @return the stored file name, to keep in the report
+     */
+    public String saveAttachment(String reportId, File source, String extension) throws IOException {
+        File dir = new File(ATTACHMENT_DIR);
+        dir.mkdirs();
+        String name = reportId + "." + extension;
+        Files.copy(source.toPath(), new File(dir, name).toPath(), StandardCopyOption.REPLACE_EXISTING);
+        return name;
+    }
+
+    /**
+     * getAttachmentFile — where a stored attachment is on disk.
+     * getName() drops any folder part, so a damaged or edited reports.txt
+     * entry like "../../secret.txt" can't point outside data/attachments.
+     */
+    public File getAttachmentFile(String fileName) {
+        return new File(ATTACHMENT_DIR, new File(fileName).getName());
+    }
+
     /** addReport — upsert by reportId, then persist. */
     public void addReport(MaintenanceReport r) {
         for (int i = 0; i < reports.size(); i++) {
@@ -802,6 +986,57 @@ public class DataStore {
                 result.add(r);
             }
         return result;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  Notifications and the activity log
+    // ─────────────────────────────────────────────────────────────────────────
+
+    /** addNotification — store a new notification and save notifications.txt. */
+    public void addNotification(Notification n) {
+        notifications.add(n);
+        saveNotifications();
+    }
+
+    /** getNotificationsFor — one user's notifications, oldest first. */
+    public ArrayList<Notification> getNotificationsFor(String userId) {
+        ArrayList<Notification> result = new ArrayList<>();
+        for (Notification n : notifications) {
+            if (n.getUserId().equals(userId)) {
+                result.add(n);
+            }
+        }
+        return result;
+    }
+
+    /** saveNotificationChanges — save after notifications were marked as read. */
+    public void saveNotificationChanges() {
+        saveNotifications();
+    }
+
+    /**
+     * appendLog — add one entry to the activity log.  The log only ever
+     * grows, so instead of rewriting the whole file (like the other lists)
+     * the new line is added to the end of activity-log.txt.
+     */
+    public void appendLog(LogEntry e) {
+        activityLog.add(e);
+        File file = new File(LOG_FILE);
+        boolean isNew = !file.exists();
+        try (PrintWriter pw = new PrintWriter(new FileWriter(file, true))) {   // true = append
+            if (isNew) {
+                pw.println("# time|userId|action|details");
+            }
+            pw.println(String.join("|", safe(e.getTime()), safe(e.getUserId()),
+                    e.getAction().name(), safe(e.getDetails())));
+        } catch (IOException ex) {
+            System.err.println("Write error: " + ex.getMessage());
+        }
+    }
+
+    /** getActivityLog — every log entry, oldest first (a copy). */
+    public ArrayList<LogEntry> getActivityLog() {
+        return new ArrayList<>(activityLog);
     }
 
     /**

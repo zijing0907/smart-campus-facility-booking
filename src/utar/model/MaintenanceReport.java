@@ -24,6 +24,7 @@ public class MaintenanceReport implements Reportable {
     private String reportedDate;        // dd/MM/yyyy
     private String resolvedDate;        // dd/MM/yyyy (null if not done yet)
     private String resolutionNotes;     // notes added when resolving
+    private String attachment;          // file name in data/attachments, e.g. "MR0007.jpg" (null = none)
 
     /**
      * IssueCategory — fixed list of issue types so the data is uniform.
@@ -127,6 +128,17 @@ public class MaintenanceReport implements Reportable {
     }
     public void setResolutionNotes(String n) {
         this.resolutionNotes = n;
+    }
+
+    // ── Attachment (optional photo or PDF sent with the report) ──────────────
+    public String getAttachment() {
+        return attachment;
+    }
+    public void setAttachment(String fileName) {
+        this.attachment = fileName;
+    }
+    public boolean hasAttachment() {
+        return attachment != null;
     }
 
     /** Plain text form of the report — uses getSummary(). */

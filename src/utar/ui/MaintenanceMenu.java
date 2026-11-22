@@ -25,6 +25,7 @@ public class MaintenanceMenu {
     private User               personnel;     // who is logged in
     private MaintenanceService maintService = new MaintenanceService();
     private DataStore          ds           = DataStore.getInstance();
+    private NotificationService notifier    = new NotificationService();
 
     public MaintenanceMenu(Scanner sc, User personnel) {
         this.sc        = sc;
@@ -46,6 +47,7 @@ public class MaintenanceMenu {
             ConsoleUI.printField("Specialization",
                     ((MaintenancePersonnel) personnel).getSpecialization());
             System.out.println();
+            showNotifications(personnel.getUserId());   // e.g. a newly assigned task
 
             ConsoleUI.printSection("MY TASKS");
             ConsoleUI.printMenuItem(1, "View My Assigned Tasks");
@@ -65,6 +67,17 @@ public class MaintenanceMenu {
                     return;
             }
         }
+    }
+
+    /**
+     * showNotifications — print any notifications this user hasn't seen
+     * yet (e.g. "Your booking BK0100 was approved"), then mark them as read.
+     */
+    private void showNotifications(String userId) {
+        for (Notification n : notifier.getUnread(userId)) {
+            ConsoleUI.printAlert("NEW: " + n.getMessage());
+        }
+        notifier.markAllRead(userId);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -98,6 +111,9 @@ public class MaintenanceMenu {
             System.out.printf("    Issue   : %s%n", r.getIssueDescription());
             System.out.printf("    Category: %s%n", r.getCategory());
             System.out.printf("    Reported: %s%n", r.getReportedDate());
+            if (r.hasAttachment()) {
+                System.out.printf("    Attached: %s%n", ds.getAttachmentFile(r.getAttachment()).getPath());
+            }
             ConsoleUI.printDivider();
         }
         ConsoleUI.pressEnter(sc);
@@ -156,7 +172,7 @@ public class MaintenanceMenu {
         String date  = ConsoleUI.prompt(sc, "Date (dd/MM/yyyy)");
 
         // (4) save through MaintenanceService
-        maintService.updateStatus(target.getReportId(), newStatus,
+        maintService.updateStatus(personnel.getUserId(), target.getReportId(), newStatus,
                 notes.isBlank() ? null : notes,
                 date.isBlank()  ? null : date);
 

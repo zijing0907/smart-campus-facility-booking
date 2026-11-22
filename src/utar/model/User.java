@@ -1,5 +1,7 @@
 package utar.model;
 
+import java.time.LocalDateTime;
+
 /**
  * User.java — Abstract superclass for everyone who can log into the system.
  *
@@ -22,10 +24,12 @@ public abstract class User {
     private String userId;          // e.g. "STU001", "STAFF002", "ADMIN1"
     private String name;            // full name of the user
     private String email;           // login email — must be unique
-    private String password;        // plain text password (kept simple for assignment)
+    private String password;        // salted hash of the password (see PasswordHasher), never the password itself
     private String contactNumber;   // phone number, e.g. "012-3456789"
     private String faculty;         // faculty / department text
     private UserRole role;            // tells us what kind of user this is
+    private int failedLogins;               // wrong passwords in a row (back to 0 after a good login)
+    private LocalDateTime lockedUntil;      // when a lock-out ends; null = not locked
 
     /**
      * UserRole — fixed list of role types the system supports.
@@ -96,6 +100,24 @@ public abstract class User {
     }
     public void setFaculty(String f) {
         this.faculty = f;
+    }
+
+    // ── Login lock-out (see UserService.login) ───────────────────────────────
+    public int getFailedLogins() {
+        return failedLogins;
+    }
+    public void setFailedLogins(int count) {
+        this.failedLogins = count;
+    }
+    public LocalDateTime getLockedUntil() {
+        return lockedUntil;
+    }
+    public void setLockedUntil(LocalDateTime time) {
+        this.lockedUntil = time;
+    }
+    /** true while a lock-out is still running. */
+    public boolean isLocked() {
+        return lockedUntil != null && lockedUntil.isAfter(LocalDateTime.now());
     }
 
     /**

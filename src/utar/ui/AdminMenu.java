@@ -27,6 +27,7 @@ public class AdminMenu {
     private MaintenanceService maintService  = new MaintenanceService();
     private AnalyticsService analyticsService = new AnalyticsService();
     private DataStore ds  = DataStore.getInstance();
+    private NotificationService notifier = new NotificationService();
 
     public AdminMenu(Scanner sc, User admin) {
         this.sc        = sc;
@@ -50,6 +51,7 @@ public class AdminMenu {
             // Show "facility has too many issues" alerts at the top of the screen
             for (String alert : maintService.getFrequentIssueAlerts())
                 ConsoleUI.printAlert(alert);
+            showNotifications(adminUser.getUserId());
 
             ConsoleUI.printSection("BOOKING MANAGEMENT");
             ConsoleUI.printMenuItem(1, "Process Pending Bookings (Approve/Reject)");
@@ -110,6 +112,17 @@ public class AdminMenu {
         }
     }
 
+    /**
+     * showNotifications — print any notifications this user hasn't seen
+     * yet (e.g. "Your booking BK0100 was approved"), then mark them as read.
+     */
+    private void showNotifications(String userId) {
+        for (Notification n : notifier.getUnread(userId)) {
+            ConsoleUI.printAlert("NEW: " + n.getMessage());
+        }
+        notifier.markAllRead(userId);
+    }
+
     // ─────────────────────────────────────────────────────────────────────────
     //  PROCESS PENDING BOOKINGS — option 1
     // ─────────────────────────────────────────────────────────────────────────
@@ -141,8 +154,9 @@ public class AdminMenu {
                     b.getBookingId(), u != null ? u.getName() : b.getUserId(),
                     f != null ? f.getName() : b.getFacilityId());
 
-            System.out.printf("          Date: %s  %s-%s  Purpose: %s%n",
-                    b.getDate(), b.getStartTime(), b.getEndTime(), b.getPurpose());
+            System.out.printf("          Date: %s  %s-%s  Purpose: %s  People: %s%n",
+                    b.getDate(), b.getStartTime(), b.getEndTime(), b.getPurpose(),
+                    b.getAttendees() > 0 ? String.valueOf(b.getAttendees()) : "-");
 
             System.out.printf("          Desc: %s%n", b.getDescription());
             ConsoleUI.printDivider();
@@ -173,7 +187,7 @@ public class AdminMenu {
             return;
 
         String remark = ConsoleUI.prompt(sc, "Remark (optional, ENTER to skip)");
-        bookingService.processBooking(target.getBookingId(), dec == 1,
+        bookingService.processBooking(adminUser.getUserId(), target.getBookingId(), dec == 1,
                 remark.isBlank() ? null : remark);
         ConsoleUI.printSuccess("Booking " + target.getBookingId()
                 + (dec == 1 ? " APPROVED." : " REJECTED."));
@@ -263,7 +277,7 @@ public class AdminMenu {
             return;
 
         Facility.FacilityStatus[] statuses = Facility.FacilityStatus.values();
-        maintService.setFacilityStatus(chosen.getFacilityId(), statuses[s - 1]);
+        maintService.setFacilityStatus(adminUser.getUserId(), chosen.getFacilityId(), statuses[s - 1]);
         ConsoleUI.printSuccess("Status updated to " + statuses[s - 1] + ".");
         ConsoleUI.pressEnter(sc);
     }
@@ -320,6 +334,9 @@ public class AdminMenu {
                 User assigned = ds.getUserById(r.getAssignedTo());
                 System.out.printf(" Assigned to: %s%n",
                         assigned != null ? assigned.getName() : r.getAssignedTo());
+            }
+            if (r.hasAttachment()) {
+                System.out.printf(" Attachment: %s%n", ds.getAttachmentFile(r.getAttachment()).getPath());
             }
             ConsoleUI.printDivider();
         }
@@ -400,7 +417,7 @@ public class AdminMenu {
             break;
         }
 
-        if (maintService.assignReport(target.getReportId(), personnelId))
+        if (maintService.assignReport(adminUser.getUserId(), target.getReportId(), personnelId))
             ConsoleUI.printSuccess("Report " + target.getReportId() + " assigned to " + personnelId + ".");
         else
             ConsoleUI.printError("Assignment failed.");

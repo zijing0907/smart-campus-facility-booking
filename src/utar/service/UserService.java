@@ -1,6 +1,10 @@
 package utar.service;
 
 import utar.model.*;
+import utar.util.PasswordHasher;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * UserService.java — Business logic for user accounts.
@@ -9,6 +13,10 @@ import utar.model.*;
  *   2. login          — verify email + password
  *   3. updateProfile  — change contact / faculty / name
  *   4. changePassword — change password (requires the old one)
+ * Passwords are never stored or compared as plain text: they are saved
+ * as salted hashes (see PasswordHasher) and checked with
+ * PasswordHasher.verify().
+ *
  * It does NOT touch the file system directly — instead it goes through
  * DataStore (a Singleton, see DataStore.java) which handles all file I/O.
  * Separating the logic from the storage keeps the code easier to test
@@ -18,6 +26,7 @@ public class UserService {
 
     // We grab the single shared DataStore once, on creation.
     private DataStore ds = DataStore.getInstance();
+    private ActivityLogService activityLog = new ActivityLogService();
 
     /**
      * register — create a new CampusUser account for a Student or Staff.
@@ -38,15 +47,17 @@ public class UserService {
             throw new IllegalArgumentException("Email already registered.");
         }
 
-        // STEP 2 & 3 — build the right type of user
+        // STEP 2 & 3 — build the right type of user.  Only a salted hash of
+        // the password is kept, never the password itself.
+        String passwordHash = PasswordHasher.hash(password);
         User u;
         if (role == User.UserRole.STUDENT) {
             // 'extra' = programme name for students
-            u = new CampusUser(ds.nextStudentId(), name, email, password,
+            u = new CampusUser(ds.nextStudentId(), name, email, passwordHash,
                                contact, faculty, User.UserRole.STUDENT, extra);
         } else if (role == User.UserRole.STAFF) {
             // 'extra' = department name for staff
-            u = new CampusUser(ds.nextStaffId(), name, email, password,
+            u = new CampusUser(ds.nextStaffId(), name, email, passwordHash,
                                contact, faculty, User.UserRole.STAFF, extra);
         } else {
             // Self-registration is only allowed for Student / Staff —
@@ -56,20 +67,101 @@ public class UserService {
 
         // STEP 4 — persist (DataStore writes to users.txt)
         ds.addUser(u);
+        activityLog.record(u.getUserId(), LogEntry.Action.USER_REGISTERED,
+                u.getName() + " (" + u.getRoleLabel() + ", " + u.getEmail() + ")");
         return u;
     }
+
+    /** Wrong passwords in a row before an account is locked. */
+    public static final int MAX_FAILED_LOGINS = 5;
+
+    /** How long a locked account stays locked. */
+    public static final int LOCK_MINUTES = 15;
 
     /**
      * login — return the matching User if the email + password are correct,
      * otherwise return null.  The UI uses null to mean "wrong credentials".
+     *
+     * Lock-out rule (stops someone guessing passwords forever):
+     *   • every wrong password adds 1 to the account's failed-login count
+     *   • on the MAX_FAILED_LOGINS-th wrong password in a row the account is
+     *     locked for LOCK_MINUTES, even for the right password
+     *   • a correct login sets the count back to 0
+     * The count and lock time are saved in users.txt, so restarting the
+     * program doesn't clear a lock.
+     *
+     * @throws IllegalStateException if the account is locked; the message
+     *         says until when
      */
     public User login(String email, String password) {
         User u = ds.getUserByEmail(email);
-        // Either the user doesn't exist, or the password is wrong.
-        if (u == null || !u.getPassword().equals(password)) {
+        if (u == null) {
+            // no such account — nothing to count or lock, but worth logging
+            activityLog.record("-", LogEntry.Action.LOGIN_FAILED, "Unknown email: " + email);
             return null;
         }
+
+        if (u.isLocked()) {
+            activityLog.record(u.getUserId(), LogEntry.Action.LOGIN_FAILED, "Account is locked");
+            throw new IllegalStateException(lockedMessage(u));
+        }
+
+        // Password doesn't match the stored hash
+        if (!PasswordHasher.verify(password, u.getPassword())) {
+            u.setFailedLogins(u.getFailedLogins() + 1);
+            if (u.getFailedLogins() >= MAX_FAILED_LOGINS) {
+                u.setLockedUntil(LocalDateTime.now().plusMinutes(LOCK_MINUTES).withNano(0));   // whole seconds keep users.txt tidy
+                u.setFailedLogins(0);   // start counting again after the lock ends
+                ds.addUser(u);
+                activityLog.record(u.getUserId(), LogEntry.Action.ACCOUNT_LOCKED,
+                        MAX_FAILED_LOGINS + " wrong passwords in a row; locked for " + LOCK_MINUTES + " minutes");
+                throw new IllegalStateException(lockedMessage(u));
+            }
+            ds.addUser(u);
+            activityLog.record(u.getUserId(), LogEntry.Action.LOGIN_FAILED,
+                    "Wrong password (" + u.getFailedLogins() + " of " + MAX_FAILED_LOGINS + ")");
+            return null;
+        }
+
+        // Correct password: clear any old failures (only save if something changed)
+        if (u.getFailedLogins() != 0 || u.getLockedUntil() != null) {
+            u.setFailedLogins(0);
+            u.setLockedUntil(null);
+            ds.addUser(u);
+        }
+        activityLog.record(u.getUserId(), LogEntry.Action.LOGIN, u.getName() + " (" + u.getRoleLabel() + ")");
         return u;
+    }
+
+    /**
+     * attemptsLeft — how many more wrong passwords this account can take
+     * before it's locked.  Used by the login screens after a wrong password.
+     */
+    public int attemptsLeft(String email) {
+        User u = ds.getUserByEmail(email);
+        return u == null ? 0 : MAX_FAILED_LOGINS - u.getFailedLogins();
+    }
+
+    /**
+     * unlock — admin ends a lock-out early (e.g. a student asked for help).
+     * @return true if the user exists
+     */
+    public boolean unlock(String adminId, String userId) {
+        User u = ds.getUserById(userId);
+        if (u == null) {
+            return false;
+        }
+        u.setFailedLogins(0);
+        u.setLockedUntil(null);
+        ds.addUser(u);
+        activityLog.record(adminId, LogEntry.Action.ACCOUNT_UNLOCKED, u.getName() + " (" + userId + ")");
+        return true;
+    }
+
+    private static String lockedMessage(User u) {
+        return "Too many wrong passwords. This account is locked until "
+             + u.getLockedUntil().format(DateTimeFormatter.ofPattern("HH:mm"))
+             + ". Try again later or ask the admin office to unlock it.";
     }
 
     /**
@@ -106,7 +198,17 @@ public class UserService {
         }
 
         ds.addUser(u);   // save the updated record back to disk
+        activityLog.record(userId, LogEntry.Action.PROFILE_UPDATED, u.getName());
         return true;
+    }
+
+    /**
+     * checkPassword — true if the password is correct for this user.
+     * Lets a menu check the current password before asking for a new one.
+     */
+    public boolean checkPassword(String userId, String password) {
+        User u = ds.getUserById(userId);
+        return u != null && PasswordHasher.verify(password, u.getPassword());
     }
 
     /**
@@ -118,12 +220,13 @@ public class UserService {
         User u = ds.getUserById(userId);
 
         // Reject if user not found OR if the old password doesn't match
-        if (u == null || !u.getPassword().equals(oldPass)) {
+        if (u == null || !PasswordHasher.verify(oldPass, u.getPassword())) {
             return false;
         }
 
-        u.setPassword(newPass);
+        u.setPassword(PasswordHasher.hash(newPass));   // store the new hash
         ds.addUser(u);   // persist the change
+        activityLog.record(userId, LogEntry.Action.PASSWORD_CHANGED, u.getName());
         return true;
     }
 }
