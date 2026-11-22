@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="905" height="477" viewBox="0 0 905 477" role="img" aria-label="All bookings">
+<title>All bookings</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="905" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="904" height="476" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="452.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">All bookings</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- ALL BOOKINGS --------------------------------------</tspan></text>
+<text x="22" y="89">  [0] Back  [1] All  [2] Pending  [3] Approved  [4] Rejected  [5] Cancelled</text>
+<text x="22" y="108"><tspan fill="#e3b341">  Filter (0-5): </tspan>1</text>
+<text x="22" y="127"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="146">  BK0001   Demo Student            Lecture Theatre KG01            <tspan fill="#3fb950">APPROVED </tspan> 20/04/2026 09:00-11:00</text>
+<text x="22" y="165">  BK0002   Lee Xiao Ming           Tutorial Room K209              <tspan fill="#f85149">REJECTED </tspan> 21/04/2026 14:00-16:00</text>
+<text x="22" y="184">  BK0003   Demo Staff              Computer and Internet Lab K403  <tspan fill="#3fb950">APPROVED </tspan> 22/04/2026 10:00-12:00</text>
+<text x="22" y="203">  BK0004   Priya a/p Nair          Multipurpose Hall (KB Ground)   <tspan fill="#f85149">REJECTED </tspan> 23/04/2026 08:00-12:00</text>
+<text x="22" y="222">  BK0005   Dr. Wong Chee Seng      Lecture Theatre KG01            <tspan fill="#3fb950">APPROVED </tspan> 23/11/2026 09:00-11:00</text>
+<text x="22" y="241">  BK0006   Chen Wei Jie            Lecture Theatre KG01            <tspan fill="#3fb950">APPROVED </tspan> 24/11/2026 10:00-12:00</text>
+<text x="22" y="260">  BK0007   Demo Student            Lecture Theatre KG01            <tspan fill="#3fb950">APPROVED </tspan> 25/11/2026 09:00-12:00</text>
+<text x="22" y="279">  BK0008   Dr. Suraya binti Miskon Lecture Theatre KG01            <tspan fill="#e3b341">PENDING  </tspan> 26/11/2026 13:00-15:00</text>
+<text x="22" y="298">  BK0009   Lim Jun Kai             Lecture Theatre KG01            <tspan fill="#3fb950">APPROVED </tspan> 27/11/2026 16:00-18:00</text>
+<text x="22" y="317">  BK0010   Demo Student            Computer and Internet Lab K403  <tspan fill="#f85149">REJECTED </tspan> 26/11/2026 10:00-12:00</text>
+<text x="22" y="336">  BK0011   Demo Student            Gymnasium                       <tspan fill="#f85149">CANCELLED</tspan> 28/11/2026 10:00-12:00</text>
+<text x="22" y="355">  BK0012   Demo Student            Tutorial Room K209              <tspan fill="#e3b341">PENDING  </tspan> 30/11/2026 15:00-16:00</text>
+<text x="22" y="374">  BK0013   Demo Student            Lecture Theatre KG01            <tspan fill="#3fb950">APPROVED </tspan> 25/11/2026 14:00-16:30</text>
+<text x="22" y="393"></text>
+<text x="22" y="412"><tspan fill="#39c5cf">  [i]   Total: 13 booking(s).</tspan></text>
+<text x="22" y="431"></text>
+<text x="22" y="450"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

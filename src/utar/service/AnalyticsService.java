@@ -1,6 +1,7 @@
 package utar.service;
 
 import utar.model.*;
+import utar.util.ConsoleUI;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -72,7 +73,7 @@ public class AnalyticsService {
 
     /** printFacilityTypeReport — console version of getBookingsByType(). */
     public void printFacilityTypeReport() {
-        System.out.println("  Facility Type | Bookings");
+        System.out.printf("  %-22s| %s%n", "Facility Type", "Bookings");
         System.out.println("  " + "-".repeat(35));
 
         LinkedHashMap<Facility.FacilityType, Integer> counts = getBookingsByType();
@@ -120,13 +121,13 @@ public class AnalyticsService {
 
     /** printUtilizationReport — console version of getBookingsPerFacility(). */
     public void printUtilizationReport(String period, String value) {
-        System.out.println("  Facility | Bookings | Maint Issues");
-        System.out.println("  " + "-".repeat(55));
+        System.out.printf("  %-35s | %-9s| %s%n", "Facility", "Bookings", "Maint Issues");
+        System.out.println("  " + "-".repeat(62));
 
         LinkedHashMap<Facility, Integer> counts = getBookingsPerFacility(period, value);
         for (Facility f : counts.keySet()) {
-            System.out.printf("  %-32s| %-9d| %d%n",
-                              f.getName(), counts.get(f), f.getMaintenanceCount());
+            System.out.printf("  %-35s | %-9d| %d%n",
+                              ConsoleUI.fit(f.getName(), 35), counts.get(f), f.getMaintenanceCount());
         }
     }
 
@@ -337,7 +338,7 @@ public class AnalyticsService {
         System.out.println("  Maintenance cases per facility:");
         LinkedHashMap<Facility, Integer> cases = getMaintenanceCasesPerFacility();
         for (Facility f : cases.keySet()) {
-            System.out.printf("  %-35s: %d case(s)%n", f.getName(), cases.get(f));
+            System.out.printf("  %-35s: %d case(s)%n", ConsoleUI.fit(f.getName(), 35), cases.get(f));
         }
     }
 

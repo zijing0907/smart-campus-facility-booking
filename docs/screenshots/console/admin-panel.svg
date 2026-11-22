@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="583" height="629" viewBox="0 0 583 629" role="img" aria-label="Admin panel">
-<title>Admin panel</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="914" height="705" viewBox="0 0 914 705" role="img" aria-label="Admin panel with alerts and notifications">
+<title>Admin panel with alerts and notifications</title>
 <defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
 <g clip-path="url(#w)">
 <rect width="100%" height="100%" fill="#0d1117"/>
 <rect width="100%" height="38" fill="#161b22"/>
-<line x1="0" y1="38" x2="583" y2="38" stroke="#30363d"/>
+<line x1="0" y1="38" x2="914" y2="38" stroke="#30363d"/>
 </g>
-<rect x="0.5" y="0.5" width="582" height="628" rx="10" fill="none" stroke="#30363d"/>
+<rect x="0.5" y="0.5" width="913" height="704" rx="10" fill="none" stroke="#30363d"/>
 <circle cx="20" cy="19" r="6" fill="#ff5f57"/>
 <circle cx="40" cy="19" r="6" fill="#febc2e"/>
 <circle cx="60" cy="19" r="6" fill="#28c840"/>
-<text x="291.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Admin panel</text>
+<text x="457.0" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Admin panel with alerts and notifications</text>
 <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
 <text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">+============================================================+</tspan></text>
 <text x="22" y="89"><tspan fill="#39c5cf" font-weight="bold">|              UTAR SMART CAMPUS — ADMIN PANEL               |</tspan></text>
@@ -18,28 +18,32 @@
 <text x="22" y="127"></text>
 <text x="22" y="146">  <tspan fill="#39c5cf">Admin:</tspan>           <tspan fill="#f0f6fc">Admin Office</tspan></text>
 <text x="22" y="165"></text>
-<text x="22" y="184"></text>
-<text x="22" y="203"><tspan fill="#39c5cf" font-weight="bold">--- BOOKING MANAGEMENT --------------------------------</tspan></text>
-<text x="22" y="222">  <tspan fill="#e3b341">[1]</tspan> Process Pending Bookings (Approve/Reject)</text>
-<text x="22" y="241">  <tspan fill="#e3b341">[2]</tspan> View All Bookings</text>
-<text x="22" y="260">  <tspan fill="#e3b341">[3]</tspan> Manage Facility Availability</text>
-<text x="22" y="279"></text>
-<text x="22" y="298"><tspan fill="#39c5cf" font-weight="bold">--- MAINTENANCE MANAGEMENT ----------------------------</tspan></text>
-<text x="22" y="317">  <tspan fill="#e3b341">[4]</tspan> View All Maintenance Reports</text>
-<text x="22" y="336">  <tspan fill="#e3b341">[5]</tspan> Assign Maintenance Task</text>
+<text x="22" y="184"><tspan fill="#f85149" font-weight="bold">  [!!!] NEW: New maintenance report MR0006 for Lecture Room K402: Projector flickers during lectures</tspan></text>
+<text x="22" y="203">        <tspan fill="#f85149" font-weight="bold">(photo/file attached)</tspan></text>
+<text x="22" y="222"><tspan fill="#f85149" font-weight="bold">  [!!!] NEW: New booking request BK0013 from Demo Student: Lecture Theatre KG01 on 25/11/2026,</tspan></text>
+<text x="22" y="241">        <tspan fill="#f85149" font-weight="bold">14:00-16:00 for 35 people.</tspan></text>
+<text x="22" y="260"></text>
+<text x="22" y="279"><tspan fill="#39c5cf" font-weight="bold">--- BOOKING MANAGEMENT --------------------------------</tspan></text>
+<text x="22" y="298">  <tspan fill="#e3b341">[1]</tspan> Process Pending Bookings (Approve/Reject)</text>
+<text x="22" y="317">  <tspan fill="#e3b341">[2]</tspan> View All Bookings</text>
+<text x="22" y="336">  <tspan fill="#e3b341">[3]</tspan> Manage Facility Availability</text>
 <text x="22" y="355"></text>
-<text x="22" y="374"><tspan fill="#39c5cf" font-weight="bold">--- ANALYTICS &amp; REPORTS -------------------------------</tspan></text>
-<text x="22" y="393">  <tspan fill="#e3b341">[6]</tspan> Facility Utilization Report</text>
-<text x="22" y="412">  <tspan fill="#e3b341">[7]</tspan> Peak Booking Hours</text>
-<text x="22" y="431">  <tspan fill="#e3b341">[8]</tspan> Facility Type Usage Report</text>
-<text x="22" y="450">  <tspan fill="#e3b341">[9]</tspan> Maintenance Summary Report</text>
-<text x="22" y="469"></text>
-<text x="22" y="488"><tspan fill="#39c5cf" font-weight="bold">--- SYSTEM --------------------------------------------</tspan></text>
-<text x="22" y="507">  <tspan fill="#e3b341">[10]</tspan> View All Users</text>
-<text x="22" y="526">  <tspan fill="#e3b341">[11]</tspan> Send Booking Reminders</text>
-<text x="22" y="545">  <tspan fill="#e3b341">[12]</tspan> View Maintenance Schedule</text>
-<text x="22" y="564">  <tspan fill="#e3b341">[0]</tspan> Logout</text>
-<text x="22" y="583"></text>
-<text x="22" y="602"><tspan fill="#e3b341">  Select option (0-12): </tspan>6</text>
+<text x="22" y="374"><tspan fill="#39c5cf" font-weight="bold">--- MAINTENANCE MANAGEMENT ----------------------------</tspan></text>
+<text x="22" y="393">  <tspan fill="#e3b341">[4]</tspan> View All Maintenance Reports</text>
+<text x="22" y="412">  <tspan fill="#e3b341">[5]</tspan> Assign Maintenance Task</text>
+<text x="22" y="431"></text>
+<text x="22" y="450"><tspan fill="#39c5cf" font-weight="bold">--- ANALYTICS &amp; REPORTS -------------------------------</tspan></text>
+<text x="22" y="469">  <tspan fill="#e3b341">[6]</tspan> Facility Utilization Report</text>
+<text x="22" y="488">  <tspan fill="#e3b341">[7]</tspan> Peak Booking Hours</text>
+<text x="22" y="507">  <tspan fill="#e3b341">[8]</tspan> Facility Type Usage Report</text>
+<text x="22" y="526">  <tspan fill="#e3b341">[9]</tspan> Maintenance Summary Report</text>
+<text x="22" y="545"></text>
+<text x="22" y="564"><tspan fill="#39c5cf" font-weight="bold">--- SYSTEM --------------------------------------------</tspan></text>
+<text x="22" y="583">  <tspan fill="#e3b341">[10]</tspan> View All Users</text>
+<text x="22" y="602">  <tspan fill="#e3b341">[11]</tspan> Send Booking Reminders</text>
+<text x="22" y="621">  <tspan fill="#e3b341">[12]</tspan> View Maintenance Schedule</text>
+<text x="22" y="640">  <tspan fill="#e3b341">[0]</tspan> Logout</text>
+<text x="22" y="659"></text>
+<text x="22" y="678"><tspan fill="#e3b341">  Select option (0-12): </tspan>1</text>
 </g>
 </svg>

@@ -104,9 +104,9 @@ public class MaintenanceMenu {
         ConsoleUI.printDivider();
         for (MaintenanceReport r : myTasks) {
             Facility f = ds.getFacilityById(r.getFacilityId());
-            System.out.printf("  %-8s %-28s [%s]%n",
+            System.out.printf("  %-8s %-35s [%s]%n",
                     r.getReportId(),
-                    f != null ? f.getName() : r.getFacilityId(),
+                    ConsoleUI.fit(f != null ? f.getName() : r.getFacilityId(), 35),
                     r.getStatus());
             System.out.printf("    Issue   : %s%n", r.getIssueDescription());
             System.out.printf("    Category: %s%n", r.getCategory());
@@ -145,10 +145,10 @@ public class MaintenanceMenu {
         for (int i = 0; i < myTasks.size(); i++) {
             MaintenanceReport r = myTasks.get(i);
             Facility f = ds.getFacilityById(r.getFacilityId());
-            System.out.printf("  %s[%d]%s %-8s %-28s [%s]%n",
+            System.out.printf("  %s[%d]%s %-8s %-35s [%s]%n",
                     ConsoleUI.YELLOW, i + 1, ConsoleUI.RESET,
                     r.getReportId(),
-                    f != null ? f.getName() : r.getFacilityId(),
+                    ConsoleUI.fit(f != null ? f.getName() : r.getFacilityId(), 35),
                     r.getStatus());
         }
 
@@ -211,9 +211,9 @@ public class MaintenanceMenu {
         ConsoleUI.printDivider();
         for (MaintenanceReport r : done) {
             Facility f = ds.getFacilityById(r.getFacilityId());
-            System.out.printf("  %-8s %-28s Resolved: %s%n",
+            System.out.printf("  %-8s %-35s Resolved: %s%n",
                     r.getReportId(),
-                    f != null ? f.getName() : r.getFacilityId(),
+                    ConsoleUI.fit(f != null ? f.getName() : r.getFacilityId(), 35),
                     r.getResolvedDate() != null ? r.getResolvedDate() : "-");
 
             if (r.getResolutionNotes() != null) {

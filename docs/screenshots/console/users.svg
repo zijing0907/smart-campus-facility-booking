@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="957" height="724" viewBox="0 0 957 724" role="img" aria-label="All registered users">
+<title>All registered users</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="957" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="956" height="723" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="478.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">All registered users</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- ALL REGISTERED USERS ------------------------------</tspan></text>
+<text x="22" y="89">  ID       Name                         Email                        Contact        Role</text>
+<text x="22" y="108"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="127">  ADMIN01  Admin Office                 admin@utar.edu.my            03-90860288    Admin</text>
+<text x="22" y="146">  STAFF01  Demo Staff                   staff@utar.edu.my            010-0000001    Staff</text>
+<text x="22" y="165">  STAFF02  Dr. Wong Chee Seng           wong.cs@utar.edu.my          019-1122334    Staff</text>
+<text x="22" y="184">  STAFF03  Dr. Suraya binti Miskon      suraya.m@utar.edu.my         013-2233445    Staff</text>
+<text x="22" y="203">  STAFF04  Mr. Rajendran Pillai         raj.p@utar.edu.my            016-3344556    Staff</text>
+<text x="22" y="222">  STAFF05  Ms. Chua Siew Fong           chua.sf@utar.edu.my          012-4455667    Staff</text>
+<text x="22" y="241">  STAFF06  Assoc. Prof. Dr. Lau Kok Lim lau.kl@utar.edu.my           011-5566778    Staff</text>
+<text x="22" y="260">  STU001   Demo Student                 student@utar.edu.my          012-7654321    Student</text>
+<text x="22" y="279">  STU002   Lee Xiao Ming                lee.xm@utar.edu.my           011-2233445    Student</text>
+<text x="22" y="298">  STU003   Priya a/p Nair               priya.n@utar.edu.my          017-8877665    Student</text>
+<text x="22" y="317">  STU004   Muhammad Hafiz bin Aziz      hafiz.a@utar.edu.my          013-5544332    Student</text>
+<text x="22" y="336">  STU005   Nur Aisyah binti Rosli       aisyah.r@utar.edu.my         014-6677889    Student</text>
+<text x="22" y="355">  STU006   Chen Wei Jie                 chen.wj@utar.edu.my          016-1122334    Student</text>
+<text x="22" y="374">  STU007   Kavitha a/p Subramaniam      kavitha.s@utar.edu.my        012-9988776    Student</text>
+<text x="22" y="393">  STU008   Lim Jun Kai                  lim.jk@utar.edu.my           019-3344556    Student</text>
+<text x="22" y="412">  STU009   Siti Nabilah binti Hamdan    nabilah.h@utar.edu.my        011-5566778    Student</text>
+<text x="22" y="431">  STU010   Yew Kian Hong                yew.kh@utar.edu.my           017-2233445    Student</text>
+<text x="22" y="450">  STU011   Amirul Hakim bin Saad        amirul.s@utar.edu.my         013-7788990    Student</text>
+<text x="22" y="469">  STU012   Tan Mei Ling                 tan.ml@utar.edu.my           016-4455667    Student</text>
+<text x="22" y="488">  STU013   Harpreet Singh               harpreet.s@utar.edu.my       012-6677889    Student</text>
+<text x="22" y="507">  STU014   Noor Hazwani binti Kamal     hazwani.k@utar.edu.my        019-1122334    Student</text>
+<text x="22" y="526">  STU015   Ong Shi Hao                  ong.sh@utar.edu.my           011-8899001    Student</text>
+<text x="22" y="545">  STU016   Farah Hani binti Zainal      farah.z@utar.edu.my          017-5544332    Student</text>
+<text x="22" y="564">  MAINT01  Demo Maintenance             maintenance@utar.edu.my      010-0000003    Maintenance Personnel</text>
+<text x="22" y="583">  MAINT02  Ali bin Hassan               ali.h@utar.edu.my            011-1234567    Maintenance Personnel</text>
+<text x="22" y="602">  MAINT03  Kumar Selvam                 kumar.s@utar.edu.my          016-9876543    Maintenance Personnel</text>
+<text x="22" y="621">  STU017   Ong Jia Hui                  ong.jh@utar.edu.my           012-3456789    Student</text>
+<text x="22" y="640"></text>
+<text x="22" y="659"><tspan fill="#39c5cf">  [i]   Total: 27 user(s).</tspan></text>
+<text x="22" y="678"></text>
+<text x="22" y="697"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="757" height="496" viewBox="0 0 757 496" role="img" aria-label="Process pending bookings">
+<title>Process pending bookings</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="757" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="756" height="495" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="378.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Process pending bookings</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- PROCESS PENDING BOOKINGS --------------------------</tspan></text>
+<text x="22" y="89">  <tspan fill="#e3b341">[0]</tspan> Back</text>
+<text x="22" y="108"></text>
+<text x="22" y="127">  <tspan fill="#e3b341">[1]</tspan> BK0008    User: Dr. Suraya binti Miskon       Facility: Lecture Theatre KG01</text>
+<text x="22" y="146">          Date: 26/11/2026  13:00-15:00  Purpose: OFFICIAL  People: 200</text>
+<text x="22" y="165">          Desc: Guest talk: AI in healthcare</text>
+<text x="22" y="184"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="203">  <tspan fill="#e3b341">[2]</tspan> BK0012    User: Demo Student                  Facility: Tutorial Room K209</text>
+<text x="22" y="222">          Date: 30/11/2026  15:00-16:00  Purpose: ACADEMIC  People: 5</text>
+<text x="22" y="241">          Desc: Study group</text>
+<text x="22" y="260"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="279">  <tspan fill="#e3b341">[3]</tspan> BK0013    User: Demo Student                  Facility: Lecture Theatre KG01</text>
+<text x="22" y="298">          Date: 25/11/2026  14:00-16:30  Purpose: ACADEMIC  People: 6</text>
+<text x="22" y="317">          Desc: Java programming revision</text>
+<text x="22" y="336"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="355"><tspan fill="#e3b341">  Select booking (0-3): </tspan>3</text>
+<text x="22" y="374">  [0] Back   [1] Approve   [2] Reject</text>
+<text x="22" y="393"><tspan fill="#e3b341">  Decision (0-2): </tspan>1</text>
+<text x="22" y="412"><tspan fill="#e3b341">  Remark (optional, ENTER to skip): </tspan>Enjoy the session</text>
+<text x="22" y="431"><tspan fill="#3fb950">  [OK]  Booking BK0013 APPROVED.</tspan></text>
+<text x="22" y="450"></text>
+<text x="22" y="469"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

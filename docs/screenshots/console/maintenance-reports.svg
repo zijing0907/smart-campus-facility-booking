@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="723" height="648" viewBox="0 0 723 648" role="img" aria-label="Maintenance reports">
+<title>Maintenance reports</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="723" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="722" height="647" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="361.5" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Maintenance reports</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- MAINTENANCE REPORTS -------------------------------</tspan></text>
+<text x="22" y="89">  [0] Back  [1] All  [2] Unresolved  [3] Resolved</text>
+<text x="22" y="108"><tspan fill="#e3b341">  Filter (0-3): </tspan>1</text>
+<text x="22" y="127"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="146">  MR0001   Tutorial Room KB303                 <tspan fill="#e3b341">IN_PROGRESS </tspan> [AIR_CONDITIONING]</text>
+<text x="22" y="165">  By: Demo Student                  Issue: Air conditioning not working</text>
+<text x="22" y="184">  Assigned to: Demo Maintenance</text>
+<text x="22" y="203"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="222">  MR0002   Computer and Internet Lab K403      <tspan fill="#3fb950">RESOLVED    </tspan> [EQUIPMENT_DAMAGE]</text>
+<text x="22" y="241">  By: Demo Staff                    Issue: Two computers have broken keyboards</text>
+<text x="22" y="260">  Assigned to: Kumar Selvam</text>
+<text x="22" y="279"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="298">  MR0003   Gymnasium                           <tspan fill="#e3b341">REPORTED    </tspan> [EQUIPMENT_DAMAGE]</text>
+<text x="22" y="317">  By: Nur Aisyah binti Rosli        Issue: Broken equipment in gymnasium</text>
+<text x="22" y="336"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="355">  MR0004   Lecture Room K402                   <tspan fill="#e3b341">ASSIGNED    </tspan> [EQUIPMENT_DAMAGE]</text>
+<text x="22" y="374">  By: Demo Student                  Issue: Projector flickers during lectures</text>
+<text x="22" y="393">  Assigned to: Demo Maintenance</text>
+<text x="22" y="412">  Attachment: data/attachments/MR0004.jpg</text>
+<text x="22" y="431"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="450">  MR0005   Computer and Internet Lab K403      <tspan fill="#3fb950">RESOLVED    </tspan> [EQUIPMENT_DAMAGE]</text>
+<text x="22" y="469">  By: Demo Student                  Issue: PC 12 does not turn on</text>
+<text x="22" y="488">  Assigned to: Ali bin Hassan</text>
+<text x="22" y="507"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="526">  MR0006   Lecture Room K402                   <tspan fill="#e3b341">REPORTED    </tspan> [EQUIPMENT_DAMAGE]</text>
+<text x="22" y="545">  By: Demo Student                  Issue: Projector flickers during lectures</text>
+<text x="22" y="564">  Attachment: data/attachments/MR0006.jpg</text>
+<text x="22" y="583"><tspan fill="#39c5cf">  -------------------------------------------------------</tspan></text>
+<text x="22" y="602"></text>
+<text x="22" y="621"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>

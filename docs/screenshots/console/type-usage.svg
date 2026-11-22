@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="287" viewBox="0 0 560 287" role="img" aria-label="Facility type usage report">
+<title>Facility type usage report</title>
+<defs><clipPath id="w"><rect width="100%" height="100%" rx="10"/></clipPath></defs>
+<g clip-path="url(#w)">
+<rect width="100%" height="100%" fill="#0d1117"/>
+<rect width="100%" height="38" fill="#161b22"/>
+<line x1="0" y1="38" x2="560" y2="38" stroke="#30363d"/>
+</g>
+<rect x="0.5" y="0.5" width="559" height="286" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="19" r="6" fill="#ff5f57"/>
+<circle cx="40" cy="19" r="6" fill="#febc2e"/>
+<circle cx="60" cy="19" r="6" fill="#28c840"/>
+<text x="280.0" y="24" text-anchor="middle" fill="#8b949e" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Facility type usage report</text>
+<g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#c9d1d9" xml:space="preserve" style="white-space:pre">
+<text x="22" y="70"><tspan fill="#39c5cf" font-weight="bold">--- FACILITY TYPE USAGE REPORT ------------------------</tspan></text>
+<text x="22" y="89"></text>
+<text x="22" y="108">  Facility Type         | Bookings</text>
+<text x="22" y="127">  -----------------------------------</text>
+<text x="22" y="146">  LECTURE_HALL          | 7</text>
+<text x="22" y="165">  DISCUSSION_ROOM       | 1</text>
+<text x="22" y="184">  SPORTS_COURT          | 0</text>
+<text x="22" y="203">  COMPUTER_LAB          | 1</text>
+<text x="22" y="222">  MULTIPURPOSE_HALL     | 0</text>
+<text x="22" y="241"></text>
+<text x="22" y="260"><tspan fill="#e3b341">  Press ENTER to continue...</tspan></text>
+</g>
+</svg>
