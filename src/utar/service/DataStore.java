@@ -43,8 +43,10 @@ public class DataStore {
     private static DataStore instance;
 
     // ── File paths (constants) ───────────────────────────────────────────────
-    // All four .txt files live inside the "data/" folder (created at startup).
-    private static final String DATA_DIR  = "data";
+    // All the .txt files live inside the "data/" folder (created at startup).
+    // It is next to SmartCampus.jar when the program runs from the JAR, and in
+    // the folder the program was started from otherwise (see findDataDir).
+    private static final String DATA_DIR  = findDataDir();
     private static final String USERS_FILE = DATA_DIR + "/users.txt";
     private static final String FACILITY_FILE = DATA_DIR + "/facilities.txt";
     private static final String BOOKING_FILE = DATA_DIR + "/bookings.txt";
@@ -199,11 +201,37 @@ public class DataStore {
      * getInstance — the only way to get a DataStore.
      * Creates the instance lazily (on the first call) — Singleton pattern.
      */
-    public static DataStore getInstance() {
+    public static synchronized DataStore getInstance() {
         if (instance == null) {
             instance = new DataStore();
         }
         return instance;
+    }
+
+    /**
+     * findDataDir - where the data folder goes.
+     * Double-clicking a JAR doesn't always start the program in the JAR's
+     * own folder (on macOS it can start in "/", where nothing can be saved),
+     * so when running from a .jar file the data folder is put next to it.
+     * When running from compiled classes (javac or an IDE) it stays "data"
+     * in the working folder, as before.
+     */
+    private static String findDataDir() {
+        try {
+            File code = new File(DataStore.class.getProtectionDomain()
+                    .getCodeSource().getLocation().toURI());
+            if (code.isFile() && code.getName().toLowerCase().endsWith(".jar")) {
+                return new File(code.getParentFile(), "data").getPath();
+            }
+        } catch (Exception e) {
+            // no code location available - fall back to the working folder
+        }
+        return "data";
+    }
+
+    /** getDataFolder - the folder that holds the data files. */
+    public static File getDataFolder() {
+        return new File(DATA_DIR).getAbsoluteFile();
     }
 
     // ─────────────────────────────────────────────────────────────────────────
